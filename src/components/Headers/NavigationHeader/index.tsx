@@ -1,5 +1,5 @@
 import React from 'react'
-import { TextRegular } from 'components/Texts'
+import { TextMedium } from 'components/Texts'
 import { TouchableOpacity } from 'react-native'
 
 import { Container, Column, StyledIcon } from './styles'
@@ -34,7 +34,7 @@ export const NavigationHeader = ({
 
       {title &&
         <Column style={{ width: '80%' }}>
-          <TextRegular size={25}>{title}</TextRegular>
+          <TextMedium size={20}>{title}</TextMedium>
         </Column>
       }
 
