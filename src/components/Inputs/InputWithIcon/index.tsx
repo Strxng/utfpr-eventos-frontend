@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { Input, StyledIcon, Container } from './styles'
 
 interface InputWithIconProps {

@@ -1,6 +1,7 @@
 import React from 'react'
 import { TextRegular } from 'components/Texts'
 import { truncateString } from '../utils'
+
 import { Container } from './styles'
 
 interface SmallTextCardProps {

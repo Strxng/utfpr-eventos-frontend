@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import SelectList from 'react-native-dropdown-select-list'
-import { boxStyle, dropdownTextStyle, boxTextStyle, dropdownStyle, dropdownItemStyle, StyledIcon } from './styles.js'
 import { View } from 'react-native'
+
+import { boxStyle, dropdownTextStyle, boxTextStyle, dropdownStyle, dropdownItemStyle, StyledIcon } from './styles'
 
 interface FormPickerProps {
   placeholder: string

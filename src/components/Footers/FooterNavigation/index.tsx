@@ -1,5 +1,6 @@
 import React from 'react'
 import { IconButton } from 'components/Buttons'
+
 import { Container } from './styles'
 
 interface FooterNavigationProps {

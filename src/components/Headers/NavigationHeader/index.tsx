@@ -1,7 +1,8 @@
 import React from 'react'
-import { Container, Column, StyledIcon } from './styles'
 import { TextRegular } from 'components/Texts'
 import { TouchableOpacity } from 'react-native'
+
+import { Container, Column, StyledIcon } from './styles'
 
 interface NavigationHeaderProps {
   navigation: any

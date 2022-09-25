@@ -4,10 +4,7 @@
     "jsx": "react",
     "strict": true,
     "noImplicitAny": false,
-    "baseUrl": "./src",
-    "paths": {
-      "components": ["./src/components"],
-      "pages": ["./src/pages"],
-    }
-  }
+    "baseUrl": "src"
+  },
+  // "include": ["src", "font.d.ts"]
 }

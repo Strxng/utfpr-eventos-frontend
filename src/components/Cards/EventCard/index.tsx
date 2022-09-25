@@ -1,9 +1,10 @@
 import React from 'react'
-import { Container, DateContainer, Footer, LocaleContainer } from './styles'
 import { Icon } from 'components/Icon'
 import { TextBold, TextRegular } from 'components/Texts'
 import { truncateString } from '../utils'
 import moment from 'moment'
+
+import { Container, DateContainer, Footer, LocaleContainer } from './styles'
 
 interface EventCardProps {
   eventName: string

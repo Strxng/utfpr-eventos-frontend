@@ -1,5 +1,6 @@
 import React from 'react'
-import { StyledText } from './styles.js'
+
+import { StyledText } from './styles'
 
 interface TextBoldProps {
   size?: number

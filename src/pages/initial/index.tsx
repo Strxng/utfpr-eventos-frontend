@@ -8,7 +8,7 @@ import bgInitialPageImage from '../../../assets/images/bg-initial-page.jpg'
 import utfprLogo from '../../../assets/images/utfpr-logo.png'
 
 interface InitialProps {
-  navigation: any
+  navigation?: any
 }
 
 export const Initial = ({ navigation }: InitialProps): JSX.Element => {

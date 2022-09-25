@@ -1,7 +1,8 @@
 import React from 'react'
 import { TextRegular, TextBold } from 'components/Texts'
-import { Circle, Column, Container } from './styles'
 import moment from 'moment'
+
+import { Circle, Column, Container } from './styles'
 
 export const UserHeader = (): JSX.Element => {
   const checkDayMoment = (): string => {
