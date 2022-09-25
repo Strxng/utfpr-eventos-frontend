@@ -7,6 +7,7 @@ export const Container = styled.View`
   flex-direction: row;
   padding-bottom: 20px;
   justify-content: space-between;
+  align-items: center;
 `
 
 export const StyledIcon = styled(Icon)`
