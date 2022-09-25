@@ -9,7 +9,6 @@ export const Footer = styled.View`
 
 export const BgImage = styled.ImageBackground`
   flex: 1;
-  justify-content: "center";
   align-items: center;
 `
 
