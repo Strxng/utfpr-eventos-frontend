@@ -3,22 +3,23 @@ import { TextRegular } from 'components/Texts'
 import { TouchableOpacity } from 'react-native'
 
 import { Container, Column, StyledIcon } from './styles'
+import { useNavigation } from '@react-navigation/native'
 
 interface NavigationHeaderProps {
-  navigation: any
   title?: string
-  backButton: boolean
+  backButton?: boolean
   logout?: boolean
 }
 
 export const NavigationHeader = ({
-  navigation,
   title,
   backButton = false,
   logout = false
 }: NavigationHeaderProps): JSX.Element => {
+  const { goBack } = useNavigation()
+
   const handleGoBack = (): void => {
-    navigation.goBack()
+    goBack()
   }
 
   return (

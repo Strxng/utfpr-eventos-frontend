@@ -10,5 +10,4 @@ export const Container = styled.View`
   justify-content: space-between;
   border-top-left-radius: 26px;
   border-top-right-radius: 26px;
-  margin-top: auto;
 `

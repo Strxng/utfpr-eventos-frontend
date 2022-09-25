@@ -5,9 +5,8 @@ import { SearchInput } from 'components/Inputs'
 import { ScrollView } from 'react-native'
 import { TextBold, TextRegular } from 'components/Texts'
 import { EventCard, SmallTextCard } from 'components/Cards'
-import { FooterNavigation } from 'components/Footers'
 
-export const Home = (): JSX.Element => {
+export const Home = ({ navigation }: any): JSX.Element => {
   const categorias = [
     {
       id: 1,
@@ -55,12 +54,12 @@ export const Home = (): JSX.Element => {
   ]
 
   return (
-    <FullPage>
-      <Container style={{ paddingTop: 60 }}>
+    <FullPage spaceTop={true}>
+      <Container>
         <UserHeader />
       </Container>
 
-      <ScrollView >
+      <ScrollView style={{ marginBottom: 70 }}>
         <Container style={{ marginTop: 10 }}>
           <SearchInput placeholder='Pesquisar evento' value={''}/>
         </Container>
@@ -131,7 +130,6 @@ export const Home = (): JSX.Element => {
           </Container>
         </ScrollView>
       </ScrollView>
-      <FooterNavigation homeSelected/>
     </FullPage>
   )
 }

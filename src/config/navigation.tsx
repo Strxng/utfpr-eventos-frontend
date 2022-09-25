@@ -1,20 +1,34 @@
+/* eslint-disable @typescript-eslint/no-redeclare */
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
-import { Home, Initial, SignIn, SignUp } from 'pages'
+import { Home, Initial, SignIn, SignUp, Profile, Favorites } from 'pages'
+import { FooterNavigation } from 'components/Footers'
 
-const RootStack = createNativeStackNavigator()
+const Stack = createNativeStackNavigator()
+const Tab = createBottomTabNavigator()
+
+const TabNavigation = (): JSX.Element => {
+  return (
+    <Tab.Navigator initialRouteName='HomeTab' screenOptions={{ headerShown: false }} tabBar={(props) => <FooterNavigation {...props} />}>
+      <Tab.Screen name='HomeTab' component={Home}/>
+      <Tab.Screen name='FavoritesTab' component={Favorites}/>
+      <Tab.Screen name='ProfileTab' component={Profile}/>
+    </Tab.Navigator>
+  )
+}
 
 export const Navigation = (): JSX.Element => {
   return (
     <NavigationContainer>
-      <RootStack.Navigator screenOptions={{ headerShown: false }}>
-        <RootStack.Screen name='Initial' component={Initial}/>
-        <RootStack.Screen name='Home' component={Home}/>
-        <RootStack.Screen name='SignIn' component={SignIn}/>
-        <RootStack.Screen name='SignUp' component={SignUp}/>
-      </RootStack.Navigator>
+      <Stack.Navigator initialRouteName='Initial' screenOptions={{ headerShown: false }}>
+        <Stack.Screen name='Home' component={TabNavigation}/>
+        <Stack.Screen name='Initial' component={Initial}/>
+        <Stack.Screen name='SignIn' component={SignIn}/>
+        <Stack.Screen name='SignUp' component={SignUp}/>
+      </Stack.Navigator>
     </NavigationContainer>
   )
 }
