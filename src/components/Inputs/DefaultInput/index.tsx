@@ -4,7 +4,7 @@ import { Input } from './styles'
 interface DefaultInputProps {
   value: string
   placeholder: string
-  style: {}
+  style?: {}
 }
 
 export const DefaultInput = ({ value, placeholder, style = {} }: DefaultInputProps): JSX.Element => {

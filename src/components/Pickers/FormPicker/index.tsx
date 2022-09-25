@@ -5,7 +5,7 @@ import { View } from 'react-native'
 
 interface FormPickerProps {
   placeholder: string
-  style: {}
+  style?: {}
 }
 
 export const FormPicker = ({ placeholder, style }: FormPickerProps): JSX.Element => {

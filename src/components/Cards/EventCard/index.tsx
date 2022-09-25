@@ -9,7 +9,7 @@ interface EventCardProps {
   eventName: string
   eventLocal: string
   eventDate: Date
-  small: boolean
+  small?: boolean
   style: {}
 }
 

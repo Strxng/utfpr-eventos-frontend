@@ -5,7 +5,7 @@ interface InputWithIconProps {
   value: string
   placeholder: string
   iconName: string
-  style: {}
+  style?: {}
 }
 
 export const InputWithIcon = ({ value, placeholder, iconName, style }: InputWithIconProps): JSX.Element => {

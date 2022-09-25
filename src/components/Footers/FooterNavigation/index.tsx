@@ -3,9 +3,9 @@ import { IconButton } from 'components/Buttons'
 import { Container } from './styles'
 
 interface FooterNavigationProps {
-  homeSelected: boolean
-  favoritesSelected: boolean
-  userSelected: boolean
+  homeSelected?: boolean
+  favoritesSelected?: boolean
+  userSelected?: boolean
 }
 
 export const FooterNavigation = ({

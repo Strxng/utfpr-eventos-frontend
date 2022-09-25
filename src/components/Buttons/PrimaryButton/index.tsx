@@ -3,7 +3,7 @@ import { Button, ButtonText, ButtonContainer } from './styles'
 
 interface PrimaryButtonProps {
   text: string
-  style: {}
+  style?: {}
   onPress: () => void
 }
 

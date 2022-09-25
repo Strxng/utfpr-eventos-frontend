@@ -4,7 +4,7 @@ import { ContentContainer } from './styles'
 interface ContainerProps {
   row?: boolean
   style?: {}
-  children: JSX.Element
+  children: JSX.Element | JSX.Element[]
 }
 
 export const Container = ({ row = false, style, children }: ContainerProps): JSX.Element => {

@@ -4,7 +4,7 @@ import { ContentContainer } from './styles'
 interface FullPageProps {
   center?: boolean
   style?: {}
-  children: JSX.Element
+  children: JSX.Element | JSX.Element[]
 }
 
 export const FullPage = ({ center = false, style, children }: FullPageProps): JSX.Element => {

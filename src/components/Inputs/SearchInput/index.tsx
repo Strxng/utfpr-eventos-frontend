@@ -4,7 +4,7 @@ import { Input, StyledIcon, Container } from './styles'
 interface SearchInputProps {
   value: string
   placeholder: string
-  style: {}
+  style?: {}
 }
 
 export const SearchInput = ({ value, placeholder, style }: SearchInputProps): JSX.Element => {

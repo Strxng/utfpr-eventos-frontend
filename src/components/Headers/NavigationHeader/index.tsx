@@ -7,7 +7,7 @@ interface NavigationHeaderProps {
   navigation: any
   title?: string
   backButton: boolean
-  logout: boolean
+  logout?: boolean
 }
 
 export const NavigationHeader = ({
