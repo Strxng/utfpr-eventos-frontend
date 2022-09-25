@@ -52,7 +52,7 @@ export const SignUp = ({ navigation }: SignUpProps): JSX.Element => {
               <FormPicker placeholder={'Seu curso'}/>
             </InputWrapper>
 
-            <PrimaryButton text={'Pronto!'} onPress={() => {}}/>
+            <PrimaryButton text={'Pronto!'} onPress={() => { navigation.navigate('Home') }}/>
 
           </FormContainer>
         </Container>

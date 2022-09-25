@@ -17,8 +17,8 @@ export const UserHeader = (): JSX.Element => {
   return (
     <Container>
       <Column>
-        <TextRegular size={12} style={{ textAlign: 'start' }}>{checkDayMoment()}</TextRegular>
-        <TextBold size={16} style={{ textAlign: 'start' }}>Nome do usuário</TextBold>
+        <TextRegular size={12} style={{ textAlign: 'left' }}>{checkDayMoment()}</TextRegular>
+        <TextBold size={16} style={{ textAlign: 'left' }}>Nome do usuário</TextBold>
       </Column>
       <Column style={{ alignItems: 'flex-end' }}>
         <Circle/>

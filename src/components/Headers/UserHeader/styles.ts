@@ -5,6 +5,7 @@ export const Container = styled.View`
   flex-direction: row;
   background-color: black;
   width: 100%;
+  padding-bottom: 20px;
 `
 
 export const Column = styled.View`
@@ -17,6 +18,6 @@ export const Column = styled.View`
 export const Circle = styled.View`
   height: 50px;
   width: 50px;
-  border-radius: 50%;
+  border-radius: 50px;
   background-color: white;
 `

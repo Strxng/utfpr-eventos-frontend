@@ -11,7 +11,7 @@ interface FullPageProps {
 export const FullPage = ({ center = false, style, children }: FullPageProps): JSX.Element => {
   const styles = {
     ...style,
-    justifyContent: center ? 'center' : 'start'
+    justifyContent: center ? 'center' : 'flex-start'
   }
 
   return (

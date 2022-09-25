@@ -2,7 +2,7 @@ import React from 'react'
 import { FullPage, Container } from 'components/Wrappers'
 import { UserHeader } from 'components/Headers'
 import { SearchInput } from 'components/Inputs'
-import { Platform, ScrollView } from 'react-native'
+import { ScrollView } from 'react-native'
 import { TextBold, TextRegular } from 'components/Texts'
 import { EventCard, SmallTextCard } from 'components/Cards'
 import { FooterNavigation } from 'components/Footers'
@@ -56,12 +56,12 @@ export const Home = (): JSX.Element => {
 
   return (
     <FullPage>
-      <Container style={{ paddingTop: Platform.OS === 'ios' ? 60 : 0 }}>
+      <Container style={{ paddingTop: 60 }}>
         <UserHeader />
       </Container>
 
-      <ScrollView>
-        <Container style={{ marginTop: 30 }}>
+      <ScrollView >
+        <Container style={{ marginTop: 10 }}>
           <SearchInput placeholder='Pesquisar evento' value={''}/>
         </Container>
 
@@ -115,7 +115,7 @@ export const Home = (): JSX.Element => {
         <ScrollView
           horizontal={true}
           showsHorizontalScrollIndicator={false}
-          style={{ maxHeight: 230 }}
+          style={{ maxHeight: 230, marginBottom: 30 }}
         >
           <Container row={true} style={{ paddingRight: 0, marginTop: 20 }}>
             {eventos.map((evento) => (

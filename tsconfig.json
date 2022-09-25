@@ -5,6 +5,5 @@
     "strict": true,
     "noImplicitAny": false,
     "baseUrl": "src"
-  },
-  // "include": ["src", "font.d.ts"]
+  }
 }

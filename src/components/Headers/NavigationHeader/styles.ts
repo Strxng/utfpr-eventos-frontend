@@ -6,7 +6,7 @@ export const Container = styled.View`
   width: 100%;
   display: flex;
   flex-direction: row;
-  padding-top: ${Platform.OS === 'ios' ? '80px' : 20};
+  padding-top: ${Platform.OS === 'ios' ? '80px' : '20px'};
   padding-bottom: 20px;
   justify-content: space-between;
 `
