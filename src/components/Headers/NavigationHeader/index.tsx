@@ -16,10 +16,14 @@ export const NavigationHeader = ({
   backButton = false,
   logout = false
 }: NavigationHeaderProps): JSX.Element => {
-  const { goBack } = useNavigation()
+  const { goBack, navigate } = useNavigation()
 
   const handleGoBack = (): void => {
     goBack()
+  }
+
+  const handleLogout = (): void => {
+    navigate('Initial')
   }
 
   return (
@@ -40,7 +44,7 @@ export const NavigationHeader = ({
 
       <Column style={{ width: '10%', alignItems: 'flex-end' }}>
         {logout &&
-          <TouchableOpacity>
+          <TouchableOpacity onPress={handleLogout}>
             <StyledIcon name={'logout'} size={30}/>
           </TouchableOpacity>
         }

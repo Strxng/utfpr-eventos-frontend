@@ -3,8 +3,12 @@ import { TextRegular, TextBold } from 'components/Texts'
 import moment from 'moment'
 
 import { Circle, Column, Container } from './styles'
+import { TouchableOpacity } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 
 export const UserHeader = (): JSX.Element => {
+  const { navigate } = useNavigation()
+
   const checkDayMoment = (): string => {
     const dateNow = new Date()
     const hour = moment(dateNow).hour()
@@ -21,7 +25,9 @@ export const UserHeader = (): JSX.Element => {
         <TextBold size={16} style={{ textAlign: 'left' }}>Nome do usuário</TextBold>
       </Column>
       <Column style={{ alignItems: 'flex-end' }}>
-        <Circle/>
+        <TouchableOpacity onPress={() => navigate('ProfileTab')}>
+          <Circle/>
+        </TouchableOpacity>
       </Column>
     </Container>
   )

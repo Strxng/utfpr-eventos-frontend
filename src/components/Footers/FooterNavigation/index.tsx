@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { IconButton } from 'components/Buttons'
 
 import { Container } from './styles'
 import { View } from 'react-native'
 
 export const FooterNavigation = ({ navigation }: any): JSX.Element => {
-  const [selected, setSelected] = useState<string>('home')
+  const getActiveRouteName = (): string => {
+    return navigation.getState().routeNames[navigation.getState().index]
+  }
 
   return (
     <View style={{ backgroundColor: 'black' }}>
@@ -13,27 +15,24 @@ export const FooterNavigation = ({ navigation }: any): JSX.Element => {
         <IconButton
           iconName={'home'}
           size={30}
-          selected={selected === 'home'}
+          selected={getActiveRouteName() === 'HomeTab'}
           onPress={() => {
-            setSelected('home')
             navigation.navigate('HomeTab')
           }}
         />
         <IconButton
           iconName={'heart'}
           size={30}
-          selected={selected === 'favorites'}
+          selected={getActiveRouteName() === 'FavoritesTab'}
           onPress={() => {
-            setSelected('favorites')
             navigation.navigate('FavoritesTab')
           }}
         />
         <IconButton
           iconName={'user'}
           size={30}
-          selected={selected === 'profile'}
+          selected={getActiveRouteName() === 'ProfileTab'}
           onPress={() => {
-            setSelected('profile')
             navigation.navigate('ProfileTab')
           }}
         />
