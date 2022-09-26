@@ -4,6 +4,7 @@
     "jsx": "react",
     "strict": true,
     "noImplicitAny": false,
-    "baseUrl": "src"
+    "baseUrl": "src",
+    "esModuleInterop": true
   }
 }
