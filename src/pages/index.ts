@@ -1,8 +1,9 @@
-import { Home } from './home'
 import { Initial } from './initial'
 import { SignIn } from './signin'
 import { SignUp } from './signup'
-import { Profile } from './profile'
+import { Home } from './home'
 import { Favorites } from './favorites'
+import { Profile } from './profile'
+import { Filter } from './filter'
 
-export { Home, Initial, SignIn, SignUp, Profile, Favorites }
+export { Initial, SignIn, SignUp, Home, Favorites, Profile, Filter }

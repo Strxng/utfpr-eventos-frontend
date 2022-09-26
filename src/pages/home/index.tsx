@@ -3,8 +3,9 @@ import { FullPage, Container } from 'components/Wrappers'
 import { UserHeader } from 'components/Headers'
 import { SearchInput } from 'components/Inputs'
 import { ScrollView } from 'react-native'
-import { TextBold, TextRegular } from 'components/Texts'
+import { TextBold } from 'components/Texts'
 import { EventCard, SmallTextCard } from 'components/Cards'
+import { TextButton } from 'components/Buttons'
 
 export const Home = ({ navigation }: any): JSX.Element => {
   const categorias = [
@@ -53,6 +54,10 @@ export const Home = ({ navigation }: any): JSX.Element => {
     }
   ]
 
+  const handleSeeAll = (): void => {
+    navigation.navigate('Filter')
+  }
+
   return (
     <FullPage spaceTop={true}>
       <Container>
@@ -66,7 +71,7 @@ export const Home = ({ navigation }: any): JSX.Element => {
 
         <Container row={true} style={{ marginTop: 30, alignItems: 'center' }}>
           <TextBold size={22}>Categorias</TextBold>
-          <TextRegular size={13} style={{ marginLeft: 'auto' }}>Ver tudo</TextRegular>
+          <TextButton text='Ver tudo' onPress={handleSeeAll} />
         </Container>
         <ScrollView
           horizontal={true}
@@ -87,7 +92,7 @@ export const Home = ({ navigation }: any): JSX.Element => {
 
         <Container row={true} style={{ marginTop: 30, alignItems: 'center' }}>
           <TextBold size={22}>Eventos Populares</TextBold>
-          <TextRegular size={13} style={{ marginLeft: 'auto' }}>Ver tudo</TextRegular>
+          <TextButton text='Ver tudo' onPress={handleSeeAll} />
         </Container>
         <ScrollView
           horizontal={true}
@@ -109,7 +114,7 @@ export const Home = ({ navigation }: any): JSX.Element => {
 
         <Container row={true} style={{ marginTop: 30, alignItems: 'center' }}>
           <TextBold size={22}>Essa semana</TextBold>
-          <TextRegular size={13} style={{ marginLeft: 'auto' }}>Ver tudo</TextRegular>
+          <TextButton text='Ver tudo' onPress={handleSeeAll} />
         </Container>
         <ScrollView
           horizontal={true}

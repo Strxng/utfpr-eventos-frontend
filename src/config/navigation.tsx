@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
-import { Home, Initial, SignIn, SignUp, Profile, Favorites } from 'pages'
+import { Home, Initial, SignIn, SignUp, Profile, Favorites, Filter } from 'pages'
 import { FooterNavigation } from 'components/Footers'
 
 const Stack = createNativeStackNavigator()
@@ -28,6 +28,7 @@ export const Navigation = (): JSX.Element => {
         <Stack.Screen name='Initial' component={Initial}/>
         <Stack.Screen name='SignIn' component={SignIn}/>
         <Stack.Screen name='SignUp' component={SignUp}/>
+        <Stack.Screen name='Filter' component={Filter}/>
       </Stack.Navigator>
     </NavigationContainer>
   )

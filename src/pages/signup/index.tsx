@@ -15,10 +15,9 @@ interface SignUpProps {
 
 export const SignUp = ({ navigation }: SignUpProps): JSX.Element => {
   return (
-    <FullPage center={true}>
+    <FullPage center={true} spaceTop>
       <Container>
         <NavigationHeader
-          navigation={navigation}
           backButton
         />
       </Container>
