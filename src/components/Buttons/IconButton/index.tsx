@@ -4,9 +4,9 @@ import { Icon } from 'components/Icon'
 
 interface IconButtonProps {
   iconName: string
-  selected: boolean
-  size: number
-  onPress: () => void
+  selected?: boolean
+  size?: number
+  onPress?: () => void
 }
 
 export const IconButton = ({
