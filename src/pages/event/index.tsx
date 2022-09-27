@@ -80,7 +80,7 @@ export const Event = ({ navigation }: EventProps): JSX.Element => {
       </Container>
 
       <ShareContainer>
-        <LargeButton text='Compartilhar'/>
+        <LargeButton text='Compartilhar' iconName='share'/>
       </ShareContainer>
     </FullPage>
   )
