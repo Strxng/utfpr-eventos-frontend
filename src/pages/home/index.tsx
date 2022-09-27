@@ -2,7 +2,7 @@ import React from 'react'
 import { FullPage, Container } from 'components/Wrappers'
 import { UserHeader } from 'components/Headers'
 import { SearchInput } from 'components/Inputs'
-import { ScrollView } from 'react-native'
+import { ScrollView, TouchableOpacity } from 'react-native'
 import { TextBold } from 'components/Texts'
 import { EventCard, SmallTextCard } from 'components/Cards'
 import { TextButton } from 'components/Buttons'
@@ -54,8 +54,11 @@ export const Home = ({ navigation }: any): JSX.Element => {
     }
   ]
 
-  const handleSeeAll = (): void => {
+  const handleSeeAllPress = (): void => {
     navigation.navigate('Filter')
+  }
+  const handleCardPress = (): void => {
+    navigation.navigate('Event')
   }
 
   return (
@@ -71,7 +74,7 @@ export const Home = ({ navigation }: any): JSX.Element => {
 
         <Container row={true} style={{ marginTop: 30, alignItems: 'center' }}>
           <TextBold size={22}>Categorias</TextBold>
-          <TextButton text='Ver tudo' onPress={handleSeeAll} />
+          <TextButton text='Ver tudo' onPress={handleSeeAllPress} />
         </Container>
         <ScrollView
           horizontal={true}
@@ -92,7 +95,7 @@ export const Home = ({ navigation }: any): JSX.Element => {
 
         <Container row={true} style={{ marginTop: 30, alignItems: 'center' }}>
           <TextBold size={22}>Eventos Populares</TextBold>
-          <TextButton text='Ver tudo' onPress={handleSeeAll} />
+          <TextButton text='Ver tudo' onPress={handleSeeAllPress} />
         </Container>
         <ScrollView
           horizontal={true}
@@ -101,20 +104,21 @@ export const Home = ({ navigation }: any): JSX.Element => {
         >
           <Container row={true} style={{ paddingRight: 0, marginTop: 20 }}>
             {eventos.map((evento) => (
-              <EventCard
-                key={evento.id}
-                eventName={evento.nome}
-                eventDate={evento.data}
-                eventLocal={evento.local}
-                style={{ marginRight: 20 }}
-              />
+              <TouchableOpacity key={evento.id} onPress={handleCardPress}>
+                <EventCard
+                  eventName={evento.nome}
+                  eventDate={evento.data}
+                  eventLocal={evento.local}
+                  style={{ marginRight: 20 }}
+                />
+              </TouchableOpacity>
             ))}
           </Container>
         </ScrollView>
 
         <Container row={true} style={{ marginTop: 30, alignItems: 'center' }}>
           <TextBold size={22}>Essa semana</TextBold>
-          <TextButton text='Ver tudo' onPress={handleSeeAll} />
+          <TextButton text='Ver tudo' onPress={handleSeeAllPress} />
         </Container>
         <ScrollView
           horizontal={true}
