@@ -17,7 +17,7 @@ export const IconButton = ({
 }: IconButtonProps): JSX.Element => {
   return (
     <TouchableOpacity onPress={onPress}>
-        <Icon name={iconName} size={size} color={selected ? '#F6C500' : 'white'}/>
+      <Icon name={iconName} size={size} color={selected ? '#F6C500' : 'white'}/>
     </TouchableOpacity>
   )
 }
