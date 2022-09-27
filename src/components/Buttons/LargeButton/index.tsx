@@ -3,7 +3,7 @@ import { Button, ButtonText } from './styles'
 
 interface LargeButtonProps {
   text: string
-  onPress: () => void
+  onPress?: () => void
 }
 
 export const LargeButton = ({ text, onPress = () => {} }: LargeButtonProps): JSX.Element => {
