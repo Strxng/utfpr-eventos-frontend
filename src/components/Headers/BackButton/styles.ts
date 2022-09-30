@@ -6,7 +6,7 @@ export const BackButtonContainer = styled.View`
   width: 35px;
   border-radius: 20px;
   position: absolute;
-  top: 50px;
+  top: 60px;
   left: 20px;
   z-index: 1;
   justify-content: center;
