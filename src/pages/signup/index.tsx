@@ -1,5 +1,5 @@
 import React from 'react'
-import { FullPage, Container, InputWrapper } from 'components/Wrappers'
+import { FullPage, Container, MarginWrapper } from 'components/Wrappers'
 import { TextRegular, TextMedium } from 'components/Texts'
 import { DefaultInput } from 'components/Inputs'
 import { PrimaryButton } from 'components/Buttons'
@@ -27,29 +27,29 @@ export const SignUp = ({ navigation }: SignUpProps): JSX.Element => {
           <TextMedium size={30}>Cadastre-se</TextMedium>
 
           <FormContainer>
-            <InputWrapper>
+            <MarginWrapper>
               <DefaultInput placeholder={'Nome'} value={''}/>
-            </InputWrapper>
+            </MarginWrapper>
 
-            <InputWrapper>
+            <MarginWrapper>
               <DefaultInput placeholder={'Sobrenome'} value={''}/>
-            </InputWrapper>
+            </MarginWrapper>
 
-            <InputWrapper>
+            <MarginWrapper>
               <DefaultInput placeholder={'E-mail'} value={''}/>
-            </InputWrapper>
+            </MarginWrapper>
 
-            <InputWrapper>
+            <MarginWrapper>
               <DefaultInput placeholder={'RA'} value={''}/>
-            </InputWrapper>
+            </MarginWrapper>
 
-            <InputWrapper>
+            <MarginWrapper>
               <DefaultInput placeholder={'Senha'} value={''}/>
-            </InputWrapper>
+            </MarginWrapper>
 
-            <InputWrapper >
+            <MarginWrapper >
               <FormPicker placeholder={'Seu curso'}/>
-            </InputWrapper>
+            </MarginWrapper>
 
             <PrimaryButton text={'Pronto!'} onPress={() => { navigation.navigate('Home') }}/>
 

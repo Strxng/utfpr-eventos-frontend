@@ -1,5 +1,5 @@
 import { FullPage } from './FullPage'
-import { InputWrapper } from './InputWrapper'
+import { MarginWrapper } from './MarginWrapper'
 import { Container } from './Container'
 
-export { FullPage, InputWrapper, Container }
+export { FullPage, MarginWrapper, Container }

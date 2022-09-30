@@ -1,3 +1,4 @@
 import { FormPicker } from './FormPicker'
+import { FIlterPicker } from './FilterPicker'
 
-export { FormPicker }
+export { FormPicker, FIlterPicker }
