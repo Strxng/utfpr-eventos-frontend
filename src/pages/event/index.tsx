@@ -32,7 +32,7 @@ export const Event = (): JSX.Element => {
       <BackButton />
       <BannerContainer />
 
-      <Container row={true} style={{ justifyContent: 'space-between', marginTop: 20, marginBottom: 10 }}>
+      <Container row={true} style={{ justifyContent: 'space-between', marginTop: 20, marginBottom: 10, alignItems: 'center' }}>
         <TextBold size={24}>{event.name}</TextBold>
         <IconButton iconName='heart' size={30}/>
       </Container>
