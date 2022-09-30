@@ -5,16 +5,18 @@ import { truncateString } from '../utils'
 import moment from 'moment'
 
 import { Container, DateContainer, Footer, LocaleContainer } from './styles'
+import { TouchableOpacity } from 'react-native'
 
 interface EventCardProps {
   eventName: string
   eventLocal: string
   eventDate: Date
   small?: boolean
+  onPress?: () => void
   style: {}
 }
 
-export const EventCard = ({ eventName, eventLocal, eventDate, small = false, style }: EventCardProps): JSX.Element => {
+export const EventCard = ({ eventName, eventLocal, eventDate, small = false, style, onPress = () => {} }: EventCardProps): JSX.Element => {
   const formatEventDate = (): string => {
     return moment(eventDate).format('DD/MM/YYYY')
   }
@@ -32,19 +34,21 @@ export const EventCard = ({ eventName, eventLocal, eventDate, small = false, sty
   }
 
   return (
-    <Container style={{ width: small ? 170 : 280, ...style }}>
-      <DateContainer>
-        <Icon name="calendar" color='white' />
-        <TextRegular size={10} style={{ marginLeft: 8 }}>{formatEventDate()}</TextRegular>
-      </DateContainer>
+    <TouchableOpacity onPress={onPress}>
+      <Container style={{ width: small ? 170 : 280, ...style }}>
+        <DateContainer>
+          <Icon name="calendar" color='white' />
+          <TextRegular size={10} style={{ marginLeft: 8 }}>{formatEventDate()}</TextRegular>
+        </DateContainer>
 
-      <Footer>
-        <TextBold size={18} style={{ textAlign: 'left' }}>{formatEventName()}</TextBold>
-        <LocaleContainer>
-          <Icon name="location" size={15} color='white'/>
-          <TextRegular size={12} style={{ marginLeft: 5 }}>{formatEventLocal()}</TextRegular>
-        </LocaleContainer>
-      </Footer>
-    </Container>
+        <Footer>
+          <TextBold size={18} style={{ textAlign: 'left' }}>{formatEventName()}</TextBold>
+          <LocaleContainer>
+            <Icon name="location" size={15} color='white'/>
+            <TextRegular size={12} style={{ marginLeft: 5 }}>{formatEventLocal()}</TextRegular>
+          </LocaleContainer>
+        </Footer>
+      </Container>
+    </TouchableOpacity>
   )
 }

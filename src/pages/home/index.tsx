@@ -2,7 +2,7 @@ import React from 'react'
 import { FullPage, Container } from 'components/Wrappers'
 import { UserHeader } from 'components/Headers'
 import { SearchInput } from 'components/Inputs'
-import { ScrollView, TouchableOpacity } from 'react-native'
+import { ScrollView } from 'react-native'
 import { TextBold } from 'components/Texts'
 import { EventCard, SmallTextCard } from 'components/Cards'
 import { TextButton } from 'components/Buttons'
@@ -104,14 +104,14 @@ export const Home = ({ navigation }: any): JSX.Element => {
         >
           <Container row={true} style={{ paddingRight: 0, marginTop: 20 }}>
             {eventos.map((evento) => (
-              <TouchableOpacity key={evento.id} onPress={handleCardPress}>
-                <EventCard
-                  eventName={evento.nome}
-                  eventDate={evento.data}
-                  eventLocal={evento.local}
-                  style={{ marginRight: 20 }}
-                />
-              </TouchableOpacity>
+              <EventCard
+                key={evento.id}
+                eventName={evento.nome}
+                eventDate={evento.data}
+                eventLocal={evento.local}
+                onPress={handleCardPress}
+                style={{ marginRight: 20 }}
+              />
             ))}
           </Container>
         </ScrollView>
@@ -133,6 +133,7 @@ export const Home = ({ navigation }: any): JSX.Element => {
                 eventDate={evento.data}
                 eventLocal={evento.local}
                 style={{ marginRight: 20 }}
+                onPress={handleCardPress}
                 small={true}
               />
             ))}
