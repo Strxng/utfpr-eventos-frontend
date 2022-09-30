@@ -7,7 +7,7 @@ interface MarginWrapperProps {
   margin?: number
 }
 
-export const MarginWrapper = ({ children, margin }: MarginWrapperProps): JSX.Element => {
+export const MarginWrapper = ({ children, margin = 20 }: MarginWrapperProps): JSX.Element => {
   return (
     <Wrapper style={{ marginBottom: margin }}>{children}</Wrapper>
   )
