@@ -8,17 +8,10 @@ import moment from 'moment'
 import 'moment/locale/pt-br'
 
 import {
-  BackButtonContainer,
   BannerContainer,
-  DateContainer,
-  DescriptionContainer,
-  DescriptionHeader,
-  EventPrincipalsContainer,
-  HourContainer,
-  LocaleContainer,
-  PlaceAndDateContainer,
   ShareContainer
 } from './styles'
+import { BackButton } from 'components/Headers'
 
 const event = {
   name: 'Nome do Evento',
@@ -28,55 +21,40 @@ const event = {
   hour: '13:00'
 }
 
-interface EventProps {
-  navigation: any
-}
-
-export const Event = ({ navigation }: EventProps): JSX.Element => {
+export const Event = (): JSX.Element => {
   const formatEventDate = (): string => {
     moment.locale('pt-br')
     return moment(event.date).format('ddd, DD MMMM YYYY')
   }
 
-  const handleBackButtonPress = (): void => {
-    navigation.goBack()
-  }
-
   return (
     <FullPage>
-      <BannerContainer>
-        <BackButtonContainer onPress={handleBackButtonPress}>
-          <Icon name='arrow-left' color='white' size={30}/>
-        </BackButtonContainer>
-      </BannerContainer>
+      <BackButton />
+      <BannerContainer />
 
-      <Container style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'space-evenly' }}>
-        <DescriptionHeader>
-          <EventPrincipalsContainer>
-            <TextBold size={24}>{event.name}</TextBold>
-            <PlaceAndDateContainer>
-              <LocaleContainer>
-                <Icon name="location" size={15} color='white'/>
-                <TextRegular size={12} style={{ marginLeft: 5 }}>{event.locale}</TextRegular>
-              </LocaleContainer>
-              <DateContainer>
-                <Icon name='calendar' size={15} color='white'></Icon>
-                <TextRegular size={12} style={{ color: 'white', textTransform: 'capitalize', marginLeft: 5 }}>{formatEventDate()}</TextRegular>
-              </DateContainer>
-            </PlaceAndDateContainer>
-          </EventPrincipalsContainer>
-            <IconButton iconName='heart' size={30}/>
-        </DescriptionHeader>
+      <Container row={true} style={{ justifyContent: 'space-between', marginTop: 20, marginBottom: 10 }}>
+        <TextBold size={24}>{event.name}</TextBold>
+        <IconButton iconName='heart' size={30}/>
+      </Container>
 
-        <DescriptionContainer>
-          <TextBold size={20}>Descrição</TextBold>
-          <TextRegular size={13} style={{ textAlign: 'left' }}>{event.desc}</TextRegular>
-        </DescriptionContainer>
+      <Container row={true} style={{ alignItems: 'center', marginTop: 10 }}>
+        <Icon name='location' size={15} color='white'/>
+        <TextRegular size={12} style={{ marginLeft: 5 }}>Local do evento</TextRegular>
+      </Container>
 
-        <HourContainer>
-          <TextBold size={20}>Horário</TextBold>
-          <TextRegular size={13} style={{ textAlign: 'left' }}>{event.hour}</TextRegular>
-        </HourContainer>
+      <Container row={true} style={{ alignItems: 'center', marginTop: 10 }}>
+        <Icon name='calendar' size={15} color='white'/>
+        <TextRegular size={12} style={{ marginLeft: 5 }}>{formatEventDate()}</TextRegular>
+      </Container>
+
+      <Container style={{ marginTop: 20 }}>
+        <TextBold size={24} style={{ textAlign: 'left' }}>Descricao</TextBold>
+        <TextRegular size={13} style={{ textAlign: 'left' }}>{event.desc}</TextRegular>
+      </Container>
+
+      <Container style={{ marginTop: 20 }}>
+        <TextBold size={24} style={{ textAlign: 'left' }}>Horário</TextBold>
+        <TextRegular size={13} style={{ textAlign: 'left' }}>{event.hour}</TextRegular>
       </Container>
 
       <ShareContainer>
