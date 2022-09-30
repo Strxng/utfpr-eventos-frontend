@@ -18,8 +18,8 @@ export const SignIn = ({ navigation }: SignInProps): JSX.Element => {
         <TextMedium size={30}>Faça seu login</TextMedium>
 
         <FormContainer>
-          <InputWithIcon placeholder={'E-mail ou RA'} iconName={'assignment'} value={''}/>
-          <InputWithIcon placeholder={'Senha'} iconName={'padlock'} style={{ marginTop: 25 }} value={''} />
+          <InputWithIcon placeholder={'E-mail ou RA'} iconName={'assignment'}/>
+          <InputWithIcon placeholder={'Senha'} iconName={'padlock'} style={{ marginTop: 25 }}/>
 
           <TextRegular size={12} style={{ marginTop: 20 }}>Esqueci minha senha</TextRegular>
           <PrimaryButton

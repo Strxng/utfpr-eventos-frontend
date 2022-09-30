@@ -69,7 +69,7 @@ export const Home = ({ navigation }: any): JSX.Element => {
 
       <ScrollView style={{ marginBottom: 70 }}>
         <Container style={{ marginTop: 10 }}>
-          <SearchInput placeholder='Pesquisar evento' value={''}/>
+          <SearchInput placeholder='Pesquisar evento'/>
         </Container>
 
         <Container row={true} style={{ marginTop: 30, alignItems: 'center' }}>

@@ -3,7 +3,7 @@ import React from 'react'
 import { Input, StyledIcon, Container } from './styles'
 
 interface InputWithIconProps {
-  value: string
+  value?: string
   placeholder: string
   iconName: string
   style?: {}

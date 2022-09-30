@@ -28,23 +28,23 @@ export const SignUp = ({ navigation }: SignUpProps): JSX.Element => {
 
           <FormContainer>
             <MarginWrapper>
-              <DefaultInput placeholder={'Nome'} value={''}/>
+              <DefaultInput placeholder={'Nome'}/>
             </MarginWrapper>
 
             <MarginWrapper>
-              <DefaultInput placeholder={'Sobrenome'} value={''}/>
+              <DefaultInput placeholder={'Sobrenome'}/>
             </MarginWrapper>
 
             <MarginWrapper>
-              <DefaultInput placeholder={'E-mail'} value={''}/>
+              <DefaultInput placeholder={'E-mail'}/>
             </MarginWrapper>
 
             <MarginWrapper>
-              <DefaultInput placeholder={'RA'} value={''}/>
+              <DefaultInput placeholder={'RA'}/>
             </MarginWrapper>
 
             <MarginWrapper>
-              <DefaultInput placeholder={'Senha'} value={''}/>
+              <DefaultInput placeholder={'Senha'}/>
             </MarginWrapper>
 
             <MarginWrapper >

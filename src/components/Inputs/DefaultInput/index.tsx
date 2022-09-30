@@ -3,7 +3,7 @@ import React from 'react'
 import { Input } from './styles'
 
 interface DefaultInputProps {
-  value: string
+  value?: string
   placeholder: string
   style?: {}
 }
