@@ -44,11 +44,11 @@ export const Event = (): JSX.Element => {
 
       <Container row={true} style={{ alignItems: 'center', marginTop: 10 }}>
         <Icon name='calendar' size={15} color='white'/>
-        <TextRegular size={12} style={{ marginLeft: 5 }}>{formatEventDate()}</TextRegular>
+        <TextRegular size={12} style={{ marginLeft: 5, textTransform: 'capitalize' }}>{formatEventDate()}</TextRegular>
       </Container>
 
       <Container style={{ marginTop: 20 }}>
-        <TextBold size={24} style={{ textAlign: 'left' }}>Descricao</TextBold>
+        <TextBold size={24} style={{ textAlign: 'left' }}>Descriçao</TextBold>
         <TextRegular size={13} style={{ textAlign: 'left' }}>{event.desc}</TextRegular>
       </Container>
 
