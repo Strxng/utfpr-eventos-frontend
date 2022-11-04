@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { FullPage, Container } from 'components/Wrappers'
 import { TextRegular, TextMedium } from 'components/Texts'
 import { InputWithIcon } from 'components/Inputs'
@@ -6,16 +6,30 @@ import { PrimaryButton, OutlinedButton } from 'components/Buttons'
 import { FormContainer } from './styles'
 
 import { Formik, Field } from 'formik'
+import { authService } from 'services/userService'
+import { useUserContext } from 'contexts/userContext'
+import { signinSchema } from './validationSchema'
 interface SignInProps {
   navigation: any
 }
 
-// interface FormValues {
-//   emailOrRegistry: string
-//   password: string
-// }
+interface SubmitParams {
+  email: string
+  password: string
+}
 
 export const SignIn = ({ navigation }: SignInProps): JSX.Element => {
+  const { setUser } = useUserContext()
+
+  const onSubmit = useCallback(({ email, password }: SubmitParams) => {
+    authService({ email, password }).then((user) => {
+      setUser(user)
+      navigation.navigate('Home')
+    }).catch((err) => {
+      console.log(err.message)
+    })
+  }, [])
+
   return (
     <FullPage center={true}>
       <Container>
@@ -24,30 +38,33 @@ export const SignIn = ({ navigation }: SignInProps): JSX.Element => {
 
         <Formik
           initialValues={{
-            emailOrRegistry: '',
+            email: '',
             password: ''
           }}
-          onSubmit={(values) => {
-            console.log('submit')
-          }}
+          onSubmit={onSubmit}
+          validationSchema={signinSchema}
         >
-          {({ values, handleChange, handleSubmit }) => (
+          {({ values, errors, handleChange, handleSubmit }) => (
           <FormContainer>
             <Field
-              placeholder={'E-mail ou RA'}
+              placeholder={'Email'}
               iconName={'assignment'}
-              value={values.emailOrRegistry}
-              onChangeText={handleChange('emailOrRegistry')}
+              value={values.email}
+              onChangeText={handleChange('email')}
               as={InputWithIcon}
             />
+            {errors.email && <TextRegular size={10} style={{ color: '#ff6d6d', textAlign: 'left' }}>{errors.email}</TextRegular>}
+
             <Field
               placeholder={'Senha'}
               iconName={'padlock'}
               style={{ marginTop: 25 }}
               value={values.password}
               onChangeText={handleChange('password')}
+              type='password'
               as={InputWithIcon}
             />
+            {errors.password && <TextRegular size={10} style={{ color: '#ff6d6d', textAlign: 'left' }}>{errors.password}</TextRegular>}
 
             <TextRegular size={12} style={{ marginTop: 20 }}>Esqueci minha senha</TextRegular>
             <PrimaryButton

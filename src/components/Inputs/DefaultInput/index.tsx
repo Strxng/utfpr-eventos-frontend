@@ -6,10 +6,12 @@ interface DefaultInputProps {
   value?: string
   placeholder: string
   style?: {}
+  type?: 'text' | 'password'
+  onChangeText: (e: string | React.ChangeEvent<any>) => void
 }
 
-export const DefaultInput = ({ value, placeholder, style = {} }: DefaultInputProps): JSX.Element => {
+export const DefaultInput = ({ value, placeholder, type = 'text', style = {}, onChangeText = () => {} }: DefaultInputProps): JSX.Element => {
   return (
-    <Input value={value} placeholder={placeholder} placeholderTextColor={'#b7b7b7'} style={style} />
+    <Input secureTextEntry={type === 'password'} value={value} placeholder={placeholder} placeholderTextColor={'#b7b7b7'} style={style} onChangeText={onChangeText} />
   )
 }

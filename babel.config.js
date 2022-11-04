@@ -9,7 +9,10 @@ module.exports = (api) => {
           alias: {
             components: './src/components',
             pages: './src/pages',
-            contexts: './src/contexts'
+            contexts: './src/contexts',
+            services: './src/services',
+            api: './src/api',
+            storage: './src/storage'
           }
         }
       ]

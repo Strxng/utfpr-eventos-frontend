@@ -6,11 +6,12 @@ interface InputWithIconProps {
   value?: string
   placeholder: string
   iconName: string
-  onChangeText: any
+  onChangeText: (e: string | React.ChangeEvent<any>) => void
   style?: {}
+  type?: 'text' | 'password'
 }
 
-export const InputWithIcon = ({ value, placeholder, iconName, style, onChangeText }: InputWithIconProps): JSX.Element => {
+export const InputWithIcon = ({ value, type = 'text', placeholder, iconName, style, onChangeText }: InputWithIconProps): JSX.Element => {
   return (
     <Container style={style}>
       <Input
@@ -18,7 +19,8 @@ export const InputWithIcon = ({ value, placeholder, iconName, style, onChangeTex
         value={value}
         placeholder={placeholder}
         placeholderTextColor={'#b7b7b7'}
-        >
+        secureTextEntry={type === 'password'}
+      >
       </Input>
         <StyledIcon name={iconName} size={25}/>
     </Container>

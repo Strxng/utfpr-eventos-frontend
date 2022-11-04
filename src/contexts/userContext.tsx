@@ -17,6 +17,7 @@ interface User {
 
 export interface UserContextData {
   user: User | null
+  setUser: React.Dispatch<React.SetStateAction<User | null>>
 }
 
 const UserContext = createContext<UserContextData>({} as UserContextData)
@@ -33,7 +34,8 @@ export function UserProvider ({ children }: any): JSX.Element {
 
   const contextValue = useMemo(
     () => ({
-      user
+      user,
+      setUser
     }),
     [user]
   )

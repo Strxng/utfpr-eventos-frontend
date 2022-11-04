@@ -1,5 +1,5 @@
-import { ApiGet, ApiPost } from './api'
-import { saveUserToken } from './storage'
+import { mainApiGet, mainApiPost } from 'api/mainApi'
+import { destroyUserTokenStore, saveUserTokenStore } from 'storage/userStorage'
 
 interface AcessToken {
   accessToken: string
@@ -41,32 +41,24 @@ interface SignupServiceParams {
 }
 
 const authService = async ({ email, password }: AuthServiceParams): Promise<UserServiceResponse> => {
-  const { data, statusCode } = await ApiPost('auth/login', { email, password })
-  if (statusCode !== 201) {
-    throw new Error(data.message[0])
-  }
-
-  await saveUserToken(data.accessToken)
+  const { data } = await mainApiPost('auth/login', { email, password })
+  await saveUserTokenStore(data.accessToken)
   return data
 }
 
 const signupService = async (user: SignupServiceParams): Promise<UserServiceResponse> => {
-  const { data, statusCode } = await ApiPost('user', user)
-  if (statusCode !== 201) {
-    throw new Error(data.message[0])
-  }
-
-  await saveUserToken(data.accessToken)
+  const { data } = await mainApiPost('user', user)
+  await saveUserTokenStore(data.accessToken)
   return data
 }
 
 const getUserDetailsService = async (): Promise<User> => {
-  const { data, statusCode } = await ApiGet('user')
-  if (statusCode !== 200) {
-    throw new Error(data.message[0])
-  }
-
+  const { data } = await mainApiGet('user')
   return data
 }
 
-export { authService, signupService, getUserDetailsService }
+const logoutUserService = async (): Promise<void> => {
+  await destroyUserTokenStore()
+}
+
+export { authService, signupService, getUserDetailsService, logoutUserService }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SelectList from 'react-native-dropdown-select-list'
 import { View } from 'react-native'
 
@@ -6,39 +6,34 @@ import { boxStyle, dropdownTextStyle, boxTextStyle, dropdownStyle, dropdownItemS
 
 interface FormPickerProps {
   placeholder: string
+  options: any[]
+  displayColumn: string
+  valueColumn: string
   style?: {}
+  handleChange: (value: any) => void
 }
 
-export const FormPicker = ({ placeholder, style }: FormPickerProps): JSX.Element => {
-  const [, setSelectedValue] = useState(0)
-  const [arrow, setArrow] = useState('kb-arrow-down')
-
-  const handleTouch = (): void => {
-    arrow === 'kb-arrow-down' ? setArrow('kb-arrow-up') : setArrow('kb-arrow-down')
-  }
-
-  const courses = [
-    { key: '1', value: 'Engenharia de Software' },
-    { key: '2', value: 'Zootecnia' },
-    { key: '3', value: 'Biologia' },
-    { key: '4', value: 'Agronomia' }
-  ]
+export const FormPicker = ({ placeholder, options = [], displayColumn = '', valueColumn = '', style = {}, handleChange = () => {} }: FormPickerProps): JSX.Element => {
+  const data = options.map((option) => {
+    return {
+      key: option[valueColumn],
+      value: option[displayColumn]
+    }
+  })
 
   return (
-    <View onTouchStart={() => handleTouch()}>
-      <SelectList
-        placeholder={placeholder}
-        setSelected={setSelectedValue}
-        data={courses}
-        search={false}
-        boxStyles={{ ...boxStyle, ...style }}
-        inputStyles={boxTextStyle}
-        dropdownStyles={dropdownStyle}
-        dropdownTextStyles={dropdownTextStyle}
-        dropdownItemStyles={dropdownItemStyle}
-        arrowicon={
-          <StyledIcon name={arrow} size={25}/>}
-      />
-    </View>
+    <SelectList
+      placeholder={placeholder}
+      setSelected={handleChange}
+      data={data}
+      search={false}
+      boxStyles={{ ...boxStyle, ...style }}
+      inputStyles={boxTextStyle}
+      dropdownStyles={dropdownStyle}
+      dropdownTextStyles={dropdownTextStyle}
+      dropdownItemStyles={dropdownItemStyle}
+      arrowicon={
+        <StyledIcon name={'kb-arrow-down'} size={25}/>}
+    />
   )
 }

@@ -4,6 +4,8 @@ import { TouchableOpacity } from 'react-native'
 
 import { Container, Column, StyledIcon } from './styles'
 import { useNavigation } from '@react-navigation/native'
+import { logoutUserService } from 'services/userService'
+import { useUserContext } from 'contexts/userContext'
 
 interface NavigationHeaderProps {
   title?: string
@@ -17,13 +19,19 @@ export const NavigationHeader = ({
   logout = false
 }: NavigationHeaderProps): JSX.Element => {
   const { goBack, navigate } = useNavigation()
+  const { setUser } = useUserContext()
 
   const handleGoBack = (): void => {
     goBack()
   }
 
   const handleLogout = (): void => {
-    navigate('Initial')
+    logoutUserService().then(() => {
+      setUser(null)
+      navigate('Initial')
+    }).catch(() => {
+
+    })
   }
 
   return (
