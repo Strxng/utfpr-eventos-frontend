@@ -1,4 +1,3 @@
-import { useNavigation } from '@react-navigation/native'
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { getUserDetailsService } from '../services/userService'
 
@@ -24,13 +23,11 @@ const UserContext = createContext<UserContextData>({} as UserContextData)
 
 export function UserProvider ({ children }: any): JSX.Element {
   const [user, setUser] = useState<User | null>(null)
-  const navigation = useNavigation()
 
   useEffect(() => {
     getUserDetailsService().then((user) => {
       setUser(user)
     }).catch(() => {
-      navigation.reset('Initial')
     })
   }, [])
 
@@ -38,7 +35,7 @@ export function UserProvider ({ children }: any): JSX.Element {
     () => ({
       user
     }),
-    []
+    [user]
   )
 
   return <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>

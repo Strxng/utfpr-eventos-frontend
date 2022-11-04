@@ -3,6 +3,7 @@ import { ActivityIndicator } from 'react-native'
 import * as Font from 'expo-font'
 
 import { Navigation } from './src/config/navigation'
+import { UserProvider } from './src/contexts/userContext'
 
 export default function App (): JSX.Element {
   const [isLoading, setIsLoading] = useState(true)
@@ -21,5 +22,11 @@ export default function App (): JSX.Element {
     void initApp()
   }, [])
 
-  return isLoading ? <ActivityIndicator /> : <Navigation />
+  if (isLoading) return <ActivityIndicator />
+
+  return (
+    <UserProvider>
+      <Navigation />
+    </UserProvider>
+  )
 }

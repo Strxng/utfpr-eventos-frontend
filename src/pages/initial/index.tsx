@@ -6,12 +6,15 @@ import { LargeButton } from 'components/Buttons'
 import { TextRegular } from 'components/Texts'
 import bgInitialPageImage from '../../../assets/images/bg-initial-page.jpg'
 import utfprLogo from '../../../assets/images/utfpr-logo.png'
+import { useUserContext } from 'contexts/userContext'
 
 interface InitialProps {
   navigation?: any
 }
 
 export const Initial = ({ navigation }: InitialProps): JSX.Element => {
+  const { user } = useUserContext()
+
   return (
     <FullPage center={true}>
       <BgImage source={{ uri: Asset.fromModule(bgInitialPageImage).uri }} imageStyle={{ opacity: 0.2 }}>
@@ -20,7 +23,11 @@ export const Initial = ({ navigation }: InitialProps): JSX.Element => {
           <LargeButton
             text={'Descubra agora!'}
             onPress={() => {
-              navigation.navigate('SignIn')
+              if (user) {
+                navigation.navigate('Home')
+              } else {
+                navigation.navigate('SignIn')
+              }
             }}
           />
 
