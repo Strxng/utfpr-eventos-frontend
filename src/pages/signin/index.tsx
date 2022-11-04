@@ -6,7 +6,6 @@ import { PrimaryButton, OutlinedButton } from 'components/Buttons'
 import { FormContainer } from './styles'
 
 import { Formik, Field } from 'formik'
-import userService from '../../services/userService.js'
 interface SignInProps {
   navigation: any
 }
@@ -29,17 +28,7 @@ export const SignIn = ({ navigation }: SignInProps): JSX.Element => {
             password: ''
           }}
           onSubmit={(values) => {
-            userService
-              .auth(JSON.stringify({
-                email: values.emailOrRegistry,
-                password: values.password
-              }))
-              .then(response => {
-                console.log(response)
-              })
-              .catch(error => {
-                console.log(error)
-              })
+            console.log('submit')
           }}
         >
           {({ values, handleChange, handleSubmit }) => (

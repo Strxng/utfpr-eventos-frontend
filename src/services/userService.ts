@@ -1,12 +1,11 @@
-import { ApiPost } from './api'
+import { ApiGet, ApiPost } from './api'
 import { saveUserToken } from './storage'
 
-interface AuthServiceParams {
-  email: string
-  password: string
+interface AcessToken {
+  accessToken: string
 }
 
-interface UserServiceResponse {
+interface User {
   id: string
   name: string
   academicRegistry: string
@@ -16,9 +15,16 @@ interface UserServiceResponse {
   genre: string
   campus: string
   course: string
-  accessToken: string
   createdAt: Date
   updatedAt: Date
+}
+
+interface AuthServiceParams {
+  email: string
+  password: string
+}
+
+interface UserServiceResponse extends User, AcessToken {
 }
 
 interface SignupServiceParams {
@@ -54,4 +60,13 @@ const signupService = async (user: SignupServiceParams): Promise<UserServiceResp
   return data
 }
 
-export default { authService, signupService }
+const getUserDetailsService = async (): Promise<User> => {
+  const { data, statusCode } = await ApiGet('user')
+  if (statusCode !== 200) {
+    throw new Error(data.message[0])
+  }
+
+  return data
+}
+
+export { authService, signupService, getUserDetailsService }
