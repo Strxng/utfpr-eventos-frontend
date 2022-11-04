@@ -48,6 +48,14 @@ export const SignUp = ({ navigation }: SignUpProps): JSX.Element => {
             </MarginWrapper>
 
             <MarginWrapper >
+              <FormPicker placeholder={'Gênero'}/>
+            </MarginWrapper>
+
+            <MarginWrapper >
+              <FormPicker placeholder={'Seu estado'}/>
+            </MarginWrapper>
+
+            <MarginWrapper >
               <FormPicker placeholder={'Seu curso'}/>
             </MarginWrapper>
 
