@@ -5,7 +5,7 @@ interface AcessToken {
   accessToken: string
 }
 
-interface User {
+export interface User {
   id: string
   name: string
   academicRegistry: string
