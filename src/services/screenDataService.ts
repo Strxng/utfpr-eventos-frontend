@@ -26,6 +26,7 @@ export interface Event {
   local: string
   courseId: string
   course: string
+  image: string
 }
 export interface SignupScreenDataResponse {
   genres: Genre[]
