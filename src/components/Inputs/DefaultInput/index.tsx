@@ -7,11 +7,12 @@ interface DefaultInputProps {
   placeholder: string
   style?: {}
   type?: 'text' | 'password'
+  autoCapitalize?: 'words' | 'none' | 'sentences' | 'characters'
   onChangeText: (e: string | React.ChangeEvent<any>) => void
 }
 
-export const DefaultInput = ({ value, placeholder, type = 'text', style = {}, onChangeText = () => {} }: DefaultInputProps): JSX.Element => {
+export const DefaultInput = ({ value, placeholder, autoCapitalize, type = 'text', style = {}, onChangeText = () => {} }: DefaultInputProps): JSX.Element => {
   return (
-    <Input secureTextEntry={type === 'password'} value={value} placeholder={placeholder} placeholderTextColor={'#b7b7b7'} style={style} onChangeText={onChangeText} />
+    <Input secureTextEntry={type === 'password'} value={value} placeholder={placeholder} placeholderTextColor={'#b7b7b7'} style={style} onChangeText={onChangeText} autoCapitalize={autoCapitalize}/>
   )
 }
