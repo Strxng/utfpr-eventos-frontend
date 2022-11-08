@@ -37,7 +37,7 @@ export const EventCard = ({ eventName, eventLocal, eventImage, eventDate, small 
   return (
     <TouchableOpacity onPress={onPress}>
       <Container style={{ width: small ? 170 : 280, ...style }}>
-        <ImageBackground source={{ uri: eventImage }} resizeMode='cover' style={{ flex: 1, justifyContent: 'center' }}>
+        <ImageBackground source={{ uri: eventImage }} resizeMode='cover' style={{ flex: 1, justifyContent: 'center' }} imageStyle={{ borderTopLeftRadius: 18, borderTopRightRadius: 18 }}>
           <DateContainer>
             <Icon name="calendar" color='white' />
             <TextRegular size={10} style={{ marginLeft: 8 }}>{formatEventDate()}</TextRegular>
