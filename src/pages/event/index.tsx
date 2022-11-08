@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { Container, FullPage } from 'components/Wrappers'
 import { IconButton, LargeButton } from 'components/Buttons'
 import { TextBold, TextRegular } from 'components/Texts'
@@ -12,6 +12,7 @@ import {
   ShareContainer
 } from './styles'
 import { BackButton } from 'components/Headers'
+import { favoriteService } from 'services/userService'
 
 const event = {
   name: 'Nome do Evento',
@@ -21,11 +22,19 @@ const event = {
   hour: '13:00'
 }
 
-export const Event = (): JSX.Element => {
+export const Event = (eventprops: any): JSX.Element => {
   const formatEventDate = (): string => {
     moment.locale('pt-br')
     return moment(event.date).format('ddd, DD MMMM YYYY')
   }
+
+  const onFavorite = useCallback(() => {
+    favoriteService(eventprops.id).then(() => {
+      // pinta o coracao
+    }).catch(() => {
+      // joga o toast na tela
+    })
+  }, [])
 
   return (
     <FullPage>
@@ -34,7 +43,7 @@ export const Event = (): JSX.Element => {
 
       <Container row={true} style={{ justifyContent: 'space-between', marginTop: 20, marginBottom: 10, alignItems: 'center' }}>
         <TextBold size={24}>{event.name}</TextBold>
-        <IconButton iconName='heart' size={30}/>
+        <IconButton iconName='heart' size={30} onPress={onFavorite}/>
       </Container>
 
       <Container row={true} style={{ alignItems: 'center', marginTop: 10 }}>

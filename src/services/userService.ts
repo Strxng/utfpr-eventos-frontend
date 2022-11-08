@@ -40,25 +40,27 @@ interface SignupServiceParams {
   confirmPassword: string
 }
 
-const authService = async ({ email, password }: AuthServiceParams): Promise<UserServiceResponse> => {
+export const authService = async ({ email, password }: AuthServiceParams): Promise<UserServiceResponse> => {
   const { data } = await mainApiPost('auth/login', { email, password })
   await saveUserTokenStore(data.accessToken)
   return data
 }
 
-const signupService = async (user: SignupServiceParams): Promise<UserServiceResponse> => {
+export const signupService = async (user: SignupServiceParams): Promise<UserServiceResponse> => {
   const { data } = await mainApiPost('user', user)
   await saveUserTokenStore(data.accessToken)
   return data
 }
 
-const getUserDetailsService = async (): Promise<User> => {
+export const getUserDetailsService = async (): Promise<User> => {
   const { data } = await mainApiGet('user')
   return data
 }
 
-const logoutUserService = async (): Promise<void> => {
+export const logoutUserService = async (): Promise<void> => {
   await destroyUserTokenStore()
 }
 
-export { authService, signupService, getUserDetailsService, logoutUserService }
+export const favoriteService = async (eventId: string): Promise<void> => {
+  await mainApiPost('event/favorite', { eventId })
+}
