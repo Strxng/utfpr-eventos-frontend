@@ -43,7 +43,7 @@ export const Home = ({ navigation }: any): JSX.Element => {
         <UserHeader />
       </Container>
 
-      <ScrollView style={{ marginBottom: 70 }}>
+      <ScrollView style={{ marginBottom: 70, width: '100%' }}>
         <Container style={{ marginTop: 10 }}>
           <SearchInput placeholder='Pesquisar evento'/>
         </Container>
@@ -78,7 +78,7 @@ export const Home = ({ navigation }: any): JSX.Element => {
 
         <Container row={true} style={{ marginTop: 30, alignItems: 'center' }}>
           <TextBold size={22}>Eventos Populares</TextBold>
-          { <TextButton text='Ver tudo' onPress={handleSeeAllPress} />}
+          {popularEvents.length > 0 ? <TextButton text='Ver tudo' onPress={handleSeeAllPress} /> : <></>}
         </Container>
         <ScrollView
           horizontal={true}
@@ -105,7 +105,7 @@ export const Home = ({ navigation }: any): JSX.Element => {
 
         <Container row={true} style={{ marginTop: 30, alignItems: 'center' }}>
           <TextBold size={22}>Essa semana</TextBold>
-          <TextButton text='Ver tudo' onPress={handleSeeAllPress} />
+          {weekEvents.length > 0 ? <TextButton text='Ver tudo' onPress={handleSeeAllPress} /> : <></>}
         </Container>
         <ScrollView
           horizontal={true}
