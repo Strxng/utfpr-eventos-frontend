@@ -5,9 +5,12 @@ import moment from 'moment'
 import { Circle, Column, Container } from './styles'
 import { TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
+import { useUserContext } from 'contexts/userContext'
 
 export const UserHeader = (): JSX.Element => {
   const { navigate } = useNavigation()
+  const { user } = useUserContext()
+  const firstName = user?.name.split(' ').shift()
 
   const checkDayMoment = (): string => {
     const dateNow = new Date()
@@ -22,7 +25,7 @@ export const UserHeader = (): JSX.Element => {
     <Container>
       <Column>
         <TextRegular size={12} style={{ textAlign: 'left' }}>{checkDayMoment()}</TextRegular>
-        <TextBold size={16} style={{ textAlign: 'left' }}>Nome do usuário</TextBold>
+        <TextBold size={16} style={{ textAlign: 'left' }}>{firstName ?? 'Nome do usuário'}</TextBold>
       </Column>
       <Column style={{ alignItems: 'flex-end' }}>
         <TouchableOpacity onPress={() => navigate('ProfileTab')}>
