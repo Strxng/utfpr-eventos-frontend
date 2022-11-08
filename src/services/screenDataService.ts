@@ -22,11 +22,13 @@ interface Favorites {
 export interface Event {
   id: string
   name: string
+  image: string
+  description: string
   startDate: Date
+  endDate: Date
   local: string
   courseId: string
   course: string
-  image: string
 }
 export interface SignupScreenDataResponse {
   genres: Genre[]

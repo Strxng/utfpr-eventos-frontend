@@ -13,23 +13,30 @@ import {
 } from './styles'
 import { BackButton } from 'components/Headers'
 import { favoriteService } from 'services/userService'
-
-const event = {
-  name: 'Nome do Evento',
-  date: new Date(),
-  locale: 'Local do Evento',
-  desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-  hour: '13:00'
+import { Event as EventInterface } from 'services/screenDataService'
+import { ImageBackground } from 'react-native'
+interface EventProps {
+  route: {
+    params: {
+      event: EventInterface
+    }
+  }
 }
 
-export const Event = (eventprops: any): JSX.Element => {
+export const Event = (props: EventProps): JSX.Element => {
+  const event = props.route.params.event
+
   const formatEventDate = (): string => {
     moment.locale('pt-br')
-    return moment(event.date).format('ddd, DD MMMM YYYY')
+    return moment(event.startDate).format('ddd, DD MMMM YYYY')
+  }
+
+  const formatEventHour = (): string => {
+    return moment(event.startDate).format('HH:mm')
   }
 
   const onFavorite = useCallback(() => {
-    favoriteService(eventprops.id).then(() => {
+    favoriteService(event.id).then(() => {
       // pinta o coracao
     }).catch(() => {
       // joga o toast na tela
@@ -39,10 +46,12 @@ export const Event = (eventprops: any): JSX.Element => {
   return (
     <FullPage>
       <BackButton />
-      <BannerContainer />
+      <BannerContainer>
+        <ImageBackground source={{ uri: event.image }} resizeMode='cover' style={{ flex: 1, justifyContent: 'center' }} />
+      </BannerContainer>
 
       <Container row={true} style={{ justifyContent: 'space-between', marginTop: 20, marginBottom: 10, alignItems: 'center' }}>
-        <TextBold size={24}>{event.name}</TextBold>
+        <TextBold size={24} style={{ textAlign: 'left' }}>{event.name}</TextBold>
         <IconButton iconName='heart' size={30} onPress={onFavorite}/>
       </Container>
 
@@ -58,12 +67,12 @@ export const Event = (eventprops: any): JSX.Element => {
 
       <Container style={{ marginTop: 20 }}>
         <TextBold size={24} style={{ textAlign: 'left' }}>Descriçao</TextBold>
-        <TextRegular size={13} style={{ textAlign: 'left' }}>{event.desc}</TextRegular>
+        <TextRegular size={13} style={{ textAlign: 'left' }}>{event.description}</TextRegular>
       </Container>
 
       <Container style={{ marginTop: 20 }}>
         <TextBold size={24} style={{ textAlign: 'left' }}>Horário</TextBold>
-        <TextRegular size={13} style={{ textAlign: 'left' }}>{event.hour}</TextRegular>
+        <TextRegular size={13} style={{ textAlign: 'left' }}>{formatEventHour()}</TextRegular>
       </Container>
 
       <ShareContainer>

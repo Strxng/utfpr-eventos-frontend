@@ -6,7 +6,7 @@ import { ScrollView } from 'react-native'
 import { TextBold, TextRegular } from 'components/Texts'
 import { EventCard, SmallTextCard } from 'components/Cards'
 import { TextButton } from 'components/Buttons'
-import { HomeScreenDataResponse, homeScreenDataService } from 'services/screenDataService'
+import { Event, HomeScreenDataResponse, homeScreenDataService } from 'services/screenDataService'
 
 export const Home = ({ navigation }: any): JSX.Element => {
   const [screenData, setScreenData] = useState<HomeScreenDataResponse | null>(null)
@@ -25,8 +25,8 @@ export const Home = ({ navigation }: any): JSX.Element => {
   const handleSeeAllPress = (): void => {
     navigation.navigate('Filter')
   }
-  const handleCardPress = (): void => {
-    navigation.navigate('Event')
+  const handleCardPress = (event: Event): void => {
+    navigation.navigate('Event', { event })
   }
 
   useEffect(() => {
@@ -93,7 +93,8 @@ export const Home = ({ navigation }: any): JSX.Element => {
                 eventName={event.name}
                 eventDate={event.startDate}
                 eventLocal={event.local}
-                onPress={handleCardPress}
+                eventImage={event.image}
+                onPress={() => handleCardPress(event)}
                 style={{ marginRight: 20 }}
               />
               ))
@@ -120,8 +121,9 @@ export const Home = ({ navigation }: any): JSX.Element => {
                 eventName={event.name}
                 eventDate={event.startDate}
                 eventLocal={event.local}
+                eventImage={event.image}
                 style={{ marginRight: 20 }}
-                onPress={handleCardPress}
+                onPress={() => handleCardPress(event)}
                 small={true}
               />
               ))
