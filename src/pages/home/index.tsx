@@ -1,58 +1,26 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { FullPage, Container } from 'components/Wrappers'
 import { UserHeader } from 'components/Headers'
 import { SearchInput } from 'components/Inputs'
 import { ScrollView } from 'react-native'
-import { TextBold } from 'components/Texts'
+import { TextBold, TextRegular } from 'components/Texts'
 import { EventCard, SmallTextCard } from 'components/Cards'
 import { TextButton } from 'components/Buttons'
+import { HomeScreenDataResponse, homeScreenDataService } from 'services/screenDataService'
 
 export const Home = ({ navigation }: any): JSX.Element => {
-  const categorias = [
-    {
-      id: 1,
-      name: 'Engenharia de Software'
-    },
-    {
-      id: 2,
-      name: 'Engenharia Florestal'
-    },
-    {
-      id: 3,
-      name: 'Biotecnologia'
-    }
-  ]
+  const [screenData, setScreenData] = useState<HomeScreenDataResponse | null>(null)
+  const [selectedCategory, setSelectedCategory] = useState<string>('')
 
-  const eventos = [
-    {
-      id: 1,
-      nome: 'Nome do evento',
-      local: 'Local do evento',
-      data: new Date(),
-      image: null
-    },
-    {
-      id: 2,
-      nome: 'Nome do evento',
-      local: 'Local do evento',
-      data: new Date(),
-      image: null
-    },
-    {
-      id: 3,
-      nome: 'Nome do evento',
-      local: 'Local do evento',
-      data: new Date(),
-      image: null
-    },
-    {
-      id: 4,
-      nome: 'Nome do evento',
-      local: 'Local do evento',
-      data: new Date(),
-      image: null
-    }
-  ]
+  const categories = screenData?.courses ?? []
+
+  const popularEvents = selectedCategory
+    ? screenData?.popularEvents.filter((event) => event.courseId === selectedCategory) ?? []
+    : screenData?.popularEvents ?? []
+
+  const weekEvents = selectedCategory
+    ? screenData?.weekEvents.filter((event) => event.courseId === selectedCategory) ?? []
+    : screenData?.weekEvents ?? []
 
   const handleSeeAllPress = (): void => {
     navigation.navigate('Filter')
@@ -60,6 +28,14 @@ export const Home = ({ navigation }: any): JSX.Element => {
   const handleCardPress = (): void => {
     navigation.navigate('Event')
   }
+
+  useEffect(() => {
+    homeScreenDataService().then((screenDataResponse) => {
+      setScreenData(screenDataResponse)
+    }).catch(() => {
+
+    })
+  }, [])
 
   return (
     <FullPage spaceTop={true}>
@@ -72,30 +48,37 @@ export const Home = ({ navigation }: any): JSX.Element => {
           <SearchInput placeholder='Pesquisar evento'/>
         </Container>
 
-        <Container row={true} style={{ marginTop: 30, alignItems: 'center' }}>
-          <TextBold size={22}>Categorias</TextBold>
-          <TextButton text='Ver tudo' onPress={handleSeeAllPress} />
-        </Container>
-        <ScrollView
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-          style={{ maxHeight: 60 }}
-        >
-          <Container row={true} style={{ paddingRight: 0, marginTop: 20 }}>
-            {categorias.map((categoria, index) => (
-              <SmallTextCard
-                key={categoria.id}
-                text={categoria.name}
-                selected={index === 0}
-                style={{ marginRight: 10 }}
-              />
-            ))}
+        { categories.length > 0 && (
+        <>
+          <Container row={true} style={{ marginTop: 30, alignItems: 'center' }}>
+            <TextBold size={22}>Categorias</TextBold>
+            {/* <TextButton text='Ver tudo' onPress={handleSeeAllPress} /> */}
           </Container>
-        </ScrollView>
+          <ScrollView
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            style={{ maxHeight: 60 }}
+          >
+            <Container row={true} style={{ paddingRight: 0, marginTop: 20 }}>
+              {categories.map((category) => (
+                <SmallTextCard
+                  key={category.id}
+                  text={category.name}
+                  selected={selectedCategory === category.id}
+                  style={{ marginRight: 10 }}
+                  onPress={() => {
+                    setSelectedCategory(category.id)
+                  }}
+                />
+              ))}
+            </Container>
+          </ScrollView>
+        </>
+        )}
 
         <Container row={true} style={{ marginTop: 30, alignItems: 'center' }}>
           <TextBold size={22}>Eventos Populares</TextBold>
-          <TextButton text='Ver tudo' onPress={handleSeeAllPress} />
+          { <TextButton text='Ver tudo' onPress={handleSeeAllPress} />}
         </Container>
         <ScrollView
           horizontal={true}
@@ -103,16 +86,20 @@ export const Home = ({ navigation }: any): JSX.Element => {
           style={{ maxHeight: 230 }}
         >
           <Container row={true} style={{ paddingRight: 0, marginTop: 20 }}>
-            {eventos.map((evento) => (
+            {popularEvents.length > 0
+              ? popularEvents.map((event) => (
               <EventCard
-                key={evento.id}
-                eventName={evento.nome}
-                eventDate={evento.data}
-                eventLocal={evento.local}
+                key={event.id}
+                eventName={event.name}
+                eventDate={event.startDate}
+                eventLocal={event.local}
                 onPress={handleCardPress}
                 style={{ marginRight: 20 }}
               />
-            ))}
+              ))
+              : (
+                <TextRegular>Nenhum evento encontrado</TextRegular>
+                )}
           </Container>
         </ScrollView>
 
@@ -126,17 +113,21 @@ export const Home = ({ navigation }: any): JSX.Element => {
           style={{ maxHeight: 230, marginBottom: 30 }}
         >
           <Container row={true} style={{ paddingRight: 0, marginTop: 20 }}>
-            {eventos.map((evento) => (
+            {weekEvents.length > 0
+              ? weekEvents.map((event) => (
               <EventCard
-                key={evento.id}
-                eventName={evento.nome}
-                eventDate={evento.data}
-                eventLocal={evento.local}
+                key={event.id}
+                eventName={event.name}
+                eventDate={event.startDate}
+                eventLocal={event.local}
                 style={{ marginRight: 20 }}
                 onPress={handleCardPress}
                 small={true}
               />
-            ))}
+              ))
+              : (
+              <TextRegular>Nenhum evento encontrado</TextRegular>
+                )}
           </Container>
         </ScrollView>
       </ScrollView>

@@ -16,12 +16,34 @@ export interface Campus {
   courses: Course[]
 }
 
+interface Favorites {
+  favorites: number
+}
+export interface Event {
+  id: string
+  name: string
+  startDate: Date
+  local: string
+  courseId: string
+  course: string
+}
 export interface SignupScreenDataResponse {
   genres: Genre[]
   campus: Campus[]
 }
 
+export interface HomeScreenDataResponse {
+  courses: Course[]
+  popularEvents: Array<Event & Favorites>
+  weekEvents: Event[]
+}
+
 export const signupScreenDataService = async (): Promise<SignupScreenDataResponse> => {
   const { data } = await mainApiGet('screen-data/signup')
+  return data
+}
+
+export const homeScreenDataService = async (): Promise<HomeScreenDataResponse> => {
+  const { data } = await mainApiGet('screen-data/home')
   return data
 }
