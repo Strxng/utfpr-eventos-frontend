@@ -15,6 +15,7 @@ import { InputWithMask } from 'components/Inputs/InputWithMask'
 import moment from 'moment'
 import { signupService } from 'services/userService'
 import { useUserContext } from 'contexts/userContext'
+import { useToast } from 'hooks/useToast'
 
 interface SignUpProps {
   navigation: any
@@ -36,6 +37,7 @@ interface FormData {
 export const SignUp = ({ navigation }: SignUpProps): JSX.Element => {
   const [screenData, setScreenData] = useState<SignupScreenDataResponse | null>(null)
   const { setUser } = useUserContext()
+  const { notifyError } = useToast()
 
   const getCourseOptions = (campusId: string): any[] => {
     if (!campusId) return []
@@ -59,7 +61,8 @@ export const SignUp = ({ navigation }: SignUpProps): JSX.Element => {
   useEffect(() => {
     signupScreenDataService().then((screenData) => {
       setScreenData(screenData)
-    }).catch(() => {
+    }).catch((err) => {
+      notifyError(err.message)
     })
   }, [])
 

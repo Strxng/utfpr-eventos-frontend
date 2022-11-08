@@ -12,7 +12,8 @@ module.exports = (api) => {
             contexts: './src/contexts',
             services: './src/services',
             api: './src/api',
-            storage: './src/storage'
+            storage: './src/storage',
+            hooks: './src/hooks'
           }
         }
       ]

@@ -9,6 +9,7 @@ import { Formik, Field } from 'formik'
 import { authService } from 'services/userService'
 import { useUserContext } from 'contexts/userContext'
 import { signinSchema } from './validationSchema'
+import { useToast } from 'hooks/useToast'
 interface SignInProps {
   navigation: any
 }
@@ -20,13 +21,14 @@ interface SubmitParams {
 
 export const SignIn = ({ navigation }: SignInProps): JSX.Element => {
   const { setUser } = useUserContext()
+  const { notifyError } = useToast()
 
   const onSubmit = useCallback(({ email, password }: SubmitParams) => {
     authService({ email, password }).then((user) => {
       setUser(user)
       navigation.navigate('Home')
     }).catch((err) => {
-      console.log(err.message)
+      notifyError(err.message)
     })
   }, [])
 

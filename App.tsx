@@ -4,6 +4,9 @@ import * as Font from 'expo-font'
 
 import { Navigation } from './src/config/navigation'
 import { UserProvider } from './src/contexts/userContext'
+import { ThemeProvider } from 'styled-components'
+import { ToastProvider } from 'react-native-styled-toast'
+import theme from './theme'
 
 export default function App (): JSX.Element {
   const [isLoading, setIsLoading] = useState(true)
@@ -26,7 +29,11 @@ export default function App (): JSX.Element {
 
   return (
     <UserProvider>
-      <Navigation />
+      <ThemeProvider theme={theme}>
+        <ToastProvider>
+          <Navigation />
+        </ToastProvider>
+      </ThemeProvider>
     </UserProvider>
   )
 }

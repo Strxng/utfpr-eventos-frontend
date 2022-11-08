@@ -15,6 +15,7 @@ import { BackButton } from 'components/Headers'
 import { favoriteService } from 'services/userService'
 import { Event as EventInterface } from 'services/screenDataService'
 import { ImageBackground } from 'react-native'
+import { useToast } from 'hooks/useToast'
 interface EventProps {
   route: {
     params: {
@@ -24,6 +25,8 @@ interface EventProps {
 }
 
 export const Event = (props: EventProps): JSX.Element => {
+  const { notifyError } = useToast()
+
   const event = props.route.params.event
 
   const formatEventDate = (): string => {
@@ -39,7 +42,7 @@ export const Event = (props: EventProps): JSX.Element => {
     favoriteService(event.id).then(() => {
       // pinta o coracao
     }).catch(() => {
-      // joga o toast na tela
+      notifyError('Falha ao favoritar o evento')
     })
   }, [])
 

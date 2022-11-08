@@ -1,10 +1,13 @@
-export const applicationTheme = {
+export default {
+  space: [0, 4, 8, 12, 16, 20, 24, 32, 40, 48],
   colors: {
-    black: '#000',
-    white: '#fff',
-    lightGrey: '#b9b9b9',
-    grey: '#252525',
-    yellow: '#f8c404',
-    error: '#ff6d6d'
+    text: '#fff',
+    background: '#000',
+    lightBackground: '#252525',
+    primary: '#f8c404',
+    error: '#ff6d6d',
+    muted: '#171717',
+    success: '#7DBE31',
+    info: '#00FFFF'
   }
 }
