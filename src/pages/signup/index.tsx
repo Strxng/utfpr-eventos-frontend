@@ -53,7 +53,6 @@ export const SignUp = ({ navigation }: SignUpProps): JSX.Element => {
       setUser(user)
       navigation.navigate('Home')
     }).catch(() => {
-
     })
   }, [])
 
