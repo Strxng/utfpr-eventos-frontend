@@ -47,43 +47,43 @@ export const SignIn = ({ navigation }: SignInProps): JSX.Element => {
           validationSchema={signinSchema}
         >
           {({ values, errors, handleChange, handleSubmit }) => (
-          <FormContainer>
-            <Field
-              placeholder={'Email'}
-              iconName={'assignment'}
-              value={values.email}
-              onChangeText={handleChange('email')}
-              as={InputWithIcon}
-            />
-            {errors.email && <TextRegular size={10} style={{ color: '#ff6d6d', textAlign: 'left' }}>{errors.email}</TextRegular>}
+            <FormContainer>
+              <Field
+                placeholder={'Email'}
+                iconName={'assignment'}
+                value={values.email}
+                onChangeText={handleChange('email')}
+                as={InputWithIcon}
+              />
+              {errors.email && <TextRegular size={10} style={{ color: '#ff6d6d', textAlign: 'left' }}>{errors.email}</TextRegular>}
 
-            <Field
-              placeholder={'Senha'}
-              iconName={'padlock'}
-              style={{ marginTop: 25 }}
-              value={values.password}
-              onChangeText={handleChange('password')}
-              type='password'
-              as={InputWithIcon}
-            />
-            {errors.password && <TextRegular size={10} style={{ color: '#ff6d6d', textAlign: 'left' }}>{errors.password}</TextRegular>}
+              <Field
+                placeholder={'Senha'}
+                iconName={'padlock'}
+                style={{ marginTop: 25 }}
+                value={values.password}
+                onChangeText={handleChange('password')}
+                type='password'
+                as={InputWithIcon}
+              />
+              {errors.password && <TextRegular size={10} style={{ color: '#ff6d6d', textAlign: 'left' }}>{errors.password}</TextRegular>}
 
-            <TextRegular size={12} style={{ marginTop: 20 }}>Esqueci minha senha</TextRegular>
-            <PrimaryButton
-              text={'Entrar'}
-              onPress={handleSubmit}
-              style={{ marginTop: 20 }}
-            />
+              <TextRegular size={12} style={{ marginTop: 20 }}>Esqueci minha senha</TextRegular>
+              <PrimaryButton
+                text={'Entrar'}
+                onPress={handleSubmit}
+                style={{ marginTop: 20 }}
+              />
 
-            <OutlinedButton
-              text={'Criar uma conta'}
-              onPress={() => {
-                navigation.navigate('SignUp')
-              }}
-              style={{ marginTop: 20 }}/>
-          </FormContainer>
+              <OutlinedButton
+                text={'Criar uma conta'}
+                onPress={() => {
+                  navigation.navigate('SignUp')
+                }}
+                style={{ marginTop: 20 }} />
+            </FormContainer>
           )}
-          </Formik>
+        </Formik>
       </Container>
     </FullPage>
   )

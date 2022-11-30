@@ -1,4 +1,4 @@
-export default {
+export const theme = {
   space: [0, 4, 8, 12, 16, 20, 24, 32, 40, 48],
   colors: {
     text: '#fff',
@@ -9,5 +9,21 @@ export default {
     muted: '#171717',
     success: '#7DBE31',
     info: '#00FFFF'
+  }
+}
+
+export interface ThemeProps {
+  theme: {
+    space: number[]
+    colors: {
+      text: string
+      background: string
+      lightBackground: string
+      primary: string
+      error: string
+      muted: string
+      success: string
+      info: string
+    }
   }
 }

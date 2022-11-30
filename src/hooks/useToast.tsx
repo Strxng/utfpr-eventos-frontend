@@ -1,5 +1,5 @@
 import { useToast as useToastReactNativeStyled } from 'react-native-styled-toast'
-import theme from '../../theme'
+import { theme } from '../../theme'
 
 interface useToastReturn {
   notifySuccess: (msg: string) => void

@@ -24,7 +24,7 @@ export const mainApiGet = async (endpoint: string): Promise<HttpReponse> => {
       statusCode: response.status
     }
   } catch (error: any) {
-    throw new Error(error.response.data.message[0])
+    throw new Error(error?.response?.data?.message[0] || 'Falha ao comunicar com o servidor')
   }
 }
 
@@ -41,6 +41,6 @@ export const mainApiPost = async (endpoint: string, postData: any): Promise<Http
       statusCode: response.status
     }
   } catch (error: any) {
-    throw new Error(error.response.data.message[0])
+    throw new Error(error?.response?.data?.message[0] || 'Falha ao comunicar com o servidor')
   }
 }

@@ -6,9 +6,9 @@ import { Navigation } from './src/config/navigation'
 import { UserProvider } from './src/contexts/userContext'
 import { ThemeProvider } from 'styled-components'
 import { ToastProvider } from 'react-native-styled-toast'
-import theme from './theme'
+import { theme } from './theme'
 
-export default function App (): JSX.Element {
+export default function App(): JSX.Element {
   const [isLoading, setIsLoading] = useState(true)
 
   const initApp = useCallback(async () => {
