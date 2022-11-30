@@ -46,7 +46,9 @@ export const signupScreenDataService = async (): Promise<SignupScreenDataRespons
   return data
 }
 
-export const homeScreenDataService = async (): Promise<HomeScreenDataResponse> => {
-  const { data } = await mainApiGet('screen-data/home')
+export const homeScreenDataService = async (categoryId: string): Promise<HomeScreenDataResponse> => {
+  const urlString = categoryId ? `screen-data/home?categoryId=${categoryId}` : 'screen-data/home'
+
+  const { data } = await mainApiGet(urlString)
   return data
 }
