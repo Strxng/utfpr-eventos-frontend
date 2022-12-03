@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react'
-import { getUserDetailsService } from '../services/userService'
+import { getUserDetailsService, logoutUserService } from '../services/userService'
 
 interface User {
   id: string
@@ -22,13 +22,15 @@ export interface UserContextData {
 
 const UserContext = createContext<UserContextData>({} as UserContextData)
 
-export function UserProvider ({ children }: any): JSX.Element {
+export function UserProvider({ children }: any): JSX.Element {
   const [user, setUser] = useState<User | null>(null)
 
   useEffect(() => {
     getUserDetailsService().then((user) => {
       setUser(user)
     }).catch(() => {
+      logoutUserService().catch(() => { })
+      setUser(null)
     })
   }, [])
 

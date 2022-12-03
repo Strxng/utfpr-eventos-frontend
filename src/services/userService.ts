@@ -1,5 +1,6 @@
 import { mainApiDelete, mainApiGet, mainApiPost } from 'api/mainApi'
 import { destroyUserTokenStore, saveUserTokenStore } from 'storage/userStorage'
+import { Event } from './screenDataService'
 
 interface AcessToken {
   accessToken: string
@@ -17,6 +18,11 @@ export interface User {
   course: string
   createdAt: Date
   updatedAt: Date
+}
+
+interface FavoriteEventsResponse {
+  events: Event[]
+  finishedEvents: Event[]
 }
 
 interface AuthServiceParams {
@@ -67,4 +73,9 @@ export const favoriteService = async (eventId: string): Promise<void> => {
 
 export const unfavoriteService = async (eventId: string): Promise<void> => {
   await mainApiDelete(`event/favorite/${eventId}`)
+}
+
+export const getFavoriteEvents = async (): Promise <FavoriteEventsResponse> => {
+  const { data } = await mainApiGet('event/favorite')
+  return data
 }

@@ -1,29 +1,83 @@
 import { FavoriteEventCard } from 'components/Cards'
 import { TextRegular, TextMedium } from 'components/Texts'
 import { Container, FullPage, MarginWrapper } from 'components/Wrappers'
-import React from 'react'
+import { useToast } from 'hooks/useToast'
+import React, { useEffect, useState } from 'react'
 import { ScrollView } from 'react-native'
+import { Event } from 'services/screenDataService'
+import { getFavoriteEvents } from 'services/userService'
+import { useTheme } from 'styled-components'
+import { ThemeTypeProps } from '../../../theme'
 
-const mockedEvent = {
-  local: 'Local do evento',
-  nome: 'nome do evnto',
-  image: 'https://www.mirassol.sp.gov.br/imagens/16467679696227af6174875086175154.jpg'
+interface FavoritesProps {
+  navigation: any
 }
 
-export const Favorites = (): JSX.Element => {
+export const Favorites = ({ navigation }: FavoritesProps): JSX.Element => {
+  const [events, setEvents] = useState<Event[]>([])
+  const [finishedEvents, setFinishedEvents] = useState<Event[]>([])
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const { notifyError } = useToast()
+  const { font } = useTheme() as ThemeTypeProps
+
+  useEffect(() => {
+    setIsLoading(true)
+
+    getFavoriteEvents().then((eventsResponse) => {
+      setIsLoading(false)
+      setEvents(eventsResponse.events)
+      setFinishedEvents(eventsResponse.finishedEvents)
+    }).catch((err) => {
+      setIsLoading(false)
+      notifyError(err.message)
+    })
+  }, [])
+
   return (
-    <FullPage spaceTop>
+    <FullPage spaceTop isLoading={isLoading}>
       <ScrollView>
-        <Container style={{ height: 250, justifyContent: 'center', zIndex: 99, position: 'relative' }}>
+        <Container style={{ height: 200, justifyContent: 'center', zIndex: 99, position: 'relative' }}>
           <TextMedium size={30} style={{ marginBottom: 10 }}>Meus favoritos</TextMedium>
           <TextRegular size={15}>Aqui você pode ver seus eventos favoritos</TextRegular>
         </Container>
         <Container>
-          <MarginWrapper margin={15}>
-            <FavoriteEventCard eventDate={new Date()} eventLocal={mockedEvent.local} eventName={mockedEvent.nome} eventImage={mockedEvent.image} />
-          </MarginWrapper>
+          {events.map((event) => (
+            <MarginWrapper margin={15} key={event.id}>
+              <FavoriteEventCard
+                eventDate={event.startDate}
+                eventLocal={event.local}
+                eventName={event.name}
+                eventImage={event.image}
+                onPress={() => {
+                  navigation.navigate('Event', { event: { ...event, isFavorite: true } })
+                }}
+              />
+            </MarginWrapper>
+          ))}
         </Container>
+
+        {finishedEvents.length > 0 && (
+          <>
+            <TextRegular size={font.sizes.large} style={{ textAlign: 'left', marginTop: 30 }}>Eventos finalizados</TextRegular>
+            <Container style={{ marginTop: 10 }}>
+              {finishedEvents.map((event) => (
+                <MarginWrapper margin={15} key={event.id}>
+                  <FavoriteEventCard
+                    eventDate={event.startDate}
+                    eventLocal={event.local}
+                    eventName={event.name}
+                    eventImage={event.image}
+                    onPress={() => {
+
+                    }}
+                    finished={true}
+                  />
+                </MarginWrapper>
+              ))}
+            </Container>
+          </>
+        )}
       </ScrollView>
-    </FullPage>
+    </FullPage >
   )
 }

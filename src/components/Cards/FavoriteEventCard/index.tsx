@@ -14,19 +14,24 @@ interface FavoriteEventCardProps {
   eventName: string
   eventLocal: string
   eventImage: string
+  finished?: boolean
+  onPress: () => void
 }
 
-export const FavoriteEventCard = ({ eventDate, eventName, eventLocal, eventImage }: FavoriteEventCardProps): JSX.Element => {
+export const FavoriteEventCard = ({ eventDate, eventName, eventLocal, eventImage, finished, onPress = () => { } }: FavoriteEventCardProps): JSX.Element => {
   const { navigate } = useNavigation()
   const { colors } = useTheme() as ThemeTypeProps
 
   return (
-    <CardButton onPress={() => navigate('Event')}>
+    <CardButton onPress={onPress}>
       <ImageContainer>
         <ImageBackground source={{ uri: eventImage }} resizeMode='cover' style={{ flex: 1, justifyContent: 'center' }} imageStyle={{ borderTopLeftRadius: 18, borderTopRightRadius: 18, borderBottomLeftRadius: 18, borderBottomRightRadius: 18 }}>
           <DateContainer>
-            <Icon name="calendar" color={colors.textPrimary} />
-            <TextRegular size={10} style={{ marginLeft: 8 }}>{moment(eventDate).format('DD/MM/YYYY')}</TextRegular>
+            {finished ? (
+              <TextRegular size={10} style={{ marginLeft: 8 }}>Finalizado</TextRegular>
+            ) : (
+              <><Icon name="calendar" color={colors.textPrimary} /><TextRegular size={10} style={{ marginLeft: 8 }}>{moment(eventDate).format('DD/MM/YYYY')}</TextRegular></>
+            )}
           </DateContainer>
         </ImageBackground>
       </ImageContainer>
@@ -40,9 +45,9 @@ export const FavoriteEventCard = ({ eventDate, eventName, eventLocal, eventImage
         </IconWithTextContainer>
       </TextContainer>
 
-      <IconButton>
+      {!finished && <IconButton>
         <Icon name="heart" size={45} color={'yellow'} />
-      </IconButton>
+      </IconButton>}
     </CardButton>
   )
 }
