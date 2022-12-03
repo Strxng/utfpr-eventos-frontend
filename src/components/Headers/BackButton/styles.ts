@@ -1,7 +1,9 @@
 import styled from 'styled-components/native'
+import { ThemeType } from '../../../../theme'
 
 export const BackButtonContainer = styled.View`
-  background: rgba(0, 0, 0, 0.75);
+  background-color: ${({ theme }: ThemeType) => theme.colors.background};
+  opacity: 0.7;
   height: 35px;
   width: 35px;
   border-radius: 20px;

@@ -1,4 +1,5 @@
 import styled from 'styled-components/native'
+import { ThemeType } from '../../../../theme'
 import { Icon } from '../../Icon'
 
 export const Container = styled.View`
@@ -11,7 +12,7 @@ export const Container = styled.View`
 `
 
 export const StyledIcon = styled(Icon)`
-  color: white;
+  color: ${({ theme }: ThemeType) => theme.colors.textPrimary};
 `
 
 export const Column = styled.View``
