@@ -5,8 +5,11 @@ import { Asset } from 'expo-asset'
 import { LargeButton } from 'components/Buttons'
 import { TextRegular } from 'components/Texts'
 import bgInitialPageImage from '../../../assets/images/bg-initial-page.jpg'
-import utfprLogo from '../../../assets/images/utfpr-logo.png'
+import logoWhite from '../../../assets/images/logo-white.png'
+import logoBlack from '../../../assets/images/logo-black.png'
 import { useUserContext } from 'contexts/userContext'
+import { useTheme } from 'styled-components'
+import { ThemeTypeProps } from '../../../theme'
 
 interface InitialProps {
   navigation?: any
@@ -14,11 +17,12 @@ interface InitialProps {
 
 export const Initial = ({ navigation }: InitialProps): JSX.Element => {
   const { user } = useUserContext()
+  const { name } = useTheme() as ThemeTypeProps
 
   return (
     <FullPage center={true} defaultPadding={false}>
       <BgImage source={{ uri: Asset.fromModule(bgInitialPageImage).uri }} imageStyle={{ opacity: 0.2 }}>
-        <LogoImage source={{ uri: Asset.fromModule(utfprLogo).uri }} style={{ resizeMode: 'stretch' }} />
+        <LogoImage source={{ uri: Asset.fromModule(name === 'light' ? logoBlack : logoWhite).uri }} style={{ resizeMode: 'stretch', height: 160, width: 250 }} />
         <Footer>
           <LargeButton
             text={'Descubra agora!'}

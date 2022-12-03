@@ -27,7 +27,7 @@ export default function App(): JSX.Element {
 
   if (isLoading) return <ActivityIndicator />
 
-  const isDark = false
+  const isDark = true
 
   return (
     <UserProvider>
