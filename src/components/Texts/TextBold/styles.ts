@@ -1,7 +1,8 @@
 import styled from 'styled-components/native'
+import { ThemeType } from '../../../../theme'
 
 export const StyledText = styled.Text`
-  font-family: 'PlusJakartaSans-Bold';
+  font-family: ${({ theme }: ThemeType) => theme.font.families.bold};
   text-align: center;
-  color: white;
+  color: ${({ theme }: ThemeType) => theme.colors.textPrimary};
 `

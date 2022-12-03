@@ -32,7 +32,7 @@ export const lightTheme = {
     textPrimary: '#000',
     textSecondary: '#fff',
     background: '#fff',
-    lightBackground: '#d9d9d9',
+    lightBackground: '#c9c9c9',
     btnPrimary: '#000',
     btnColored: '#f8c404',
     error: '#ff6d6d',

@@ -1,12 +1,12 @@
 import styled from 'styled-components/native'
+import { ThemeType } from '../../../../theme'
 
 export const Container = styled.View`
-  background-color: #d9d9d9;
   height: 200px;
   border-radius: 18px;
 `
 export const Footer = styled.View`
-  background-color: #252525;
+  background-color: ${({ theme }: ThemeType) => theme.colors.lightBackground};
   height: 75px;
   margin-top: auto;
   border-bottom-left-radius: 18px;
@@ -32,5 +32,5 @@ export const DateContainer = styled.View`
   width: 100px;
   padding: 0px 10px;
   border-radius: 12px;
-  background-color: #b9b9b9;
+  background-color: ${({ theme }: ThemeType) => theme.colors.lightBackground};
 `

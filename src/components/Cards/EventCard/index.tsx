@@ -6,6 +6,8 @@ import moment from 'moment'
 
 import { Container, DateContainer, Footer, LocaleContainer } from './styles'
 import { ImageBackground, TouchableOpacity } from 'react-native'
+import { useTheme } from 'styled-components'
+import { ThemeTypeProps } from '../../../../theme'
 
 interface EventCardProps {
   eventName: string
@@ -17,7 +19,9 @@ interface EventCardProps {
   style?: {}
 }
 
-export const EventCard = ({ eventName, eventLocal, eventImage, eventDate, small = false, style, onPress = () => {} }: EventCardProps): JSX.Element => {
+export const EventCard = ({ eventName, eventLocal, eventImage, eventDate, small = false, style, onPress = () => { } }: EventCardProps): JSX.Element => {
+  const { colors } = useTheme() as ThemeTypeProps
+
   const formatEventDate = (): string => {
     return moment(eventDate).format('DD/MM/YYYY')
   }
@@ -39,7 +43,7 @@ export const EventCard = ({ eventName, eventLocal, eventImage, eventDate, small 
       <Container style={{ width: small ? 190 : 280, ...style }}>
         <ImageBackground source={{ uri: eventImage }} resizeMode='cover' style={{ flex: 1, justifyContent: 'center' }} imageStyle={{ borderTopLeftRadius: 18, borderTopRightRadius: 18 }}>
           <DateContainer>
-            <Icon name="calendar" color='white' />
+            <Icon name="calendar" color={colors.textPrimary} />
             <TextRegular size={10} style={{ marginLeft: 8 }}>{formatEventDate()}</TextRegular>
           </DateContainer>
         </ImageBackground>
@@ -47,7 +51,7 @@ export const EventCard = ({ eventName, eventLocal, eventImage, eventDate, small 
         <Footer>
           <TextBold size={18} style={{ textAlign: 'left' }}>{formatEventName()}</TextBold>
           <LocaleContainer>
-            <Icon name="location" size={15} color='white'/>
+            <Icon name="location" size={15} color={colors.textPrimary} />
             <TextRegular size={12} style={{ marginLeft: 5 }}>{formatEventLocal()}</TextRegular>
           </LocaleContainer>
         </Footer>
