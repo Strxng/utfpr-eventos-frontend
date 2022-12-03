@@ -16,7 +16,7 @@ export const Initial = ({ navigation }: InitialProps): JSX.Element => {
   const { user } = useUserContext()
 
   return (
-    <FullPage center={true}>
+    <FullPage center={true} defaultPadding={false}>
       <BgImage source={{ uri: Asset.fromModule(bgInitialPageImage).uri }} imageStyle={{ opacity: 0.2 }}>
         <LogoImage source={{ uri: Asset.fromModule(utfprLogo).uri }} style={{ resizeMode: 'stretch' }} />
         <Footer>

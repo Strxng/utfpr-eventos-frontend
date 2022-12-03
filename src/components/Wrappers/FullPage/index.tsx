@@ -7,13 +7,16 @@ interface FullPageProps {
   style?: {}
   spaceTop?: boolean
   children: JSX.Element | JSX.Element[]
+  defaultPadding?: boolean
 }
 
-export const FullPage = ({ center = false, style, spaceTop = false, children }: FullPageProps): JSX.Element => {
+export const FullPage = ({ center = false, style, spaceTop = false, children, defaultPadding = true }: FullPageProps): JSX.Element => {
   const styles = {
     ...style,
     justifyContent: center ? 'center' : 'flex-start',
-    paddingTop: spaceTop ? 60 : 0
+    paddingTop: spaceTop ? 60 : 0,
+    paddingRight: defaultPadding ? 20 : 0,
+    paddingLeft: defaultPadding ? 20 : 0
   }
 
   return (

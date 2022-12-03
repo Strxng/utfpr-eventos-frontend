@@ -47,35 +47,37 @@ export const Event = (props: EventProps): JSX.Element => {
   }, [])
 
   return (
-    <FullPage>
+    <FullPage defaultPadding={false}>
       <BackButton />
       <BannerContainer>
         <ImageBackground source={{ uri: event.image }} resizeMode='cover' style={{ flex: 1, justifyContent: 'center' }} />
       </BannerContainer>
 
-      <Container row={true} style={{ justifyContent: 'space-between', marginTop: 20, marginBottom: 10, alignItems: 'center' }}>
-        <TextBold size={24} style={{ textAlign: 'left' }}>{event.name}</TextBold>
-        <IconButton iconName='heart' size={30} onPress={onFavorite}/>
-      </Container>
+      <Container style={{ paddingLeft: 20, paddingRight: 20 }}>
+        <Container row={true} style={{ justifyContent: 'space-between', marginTop: 20, marginBottom: 10, alignItems: 'center' }}>
+          <TextBold size={24} style={{ textAlign: 'left' }}>{event.name}</TextBold>
+          <IconButton iconName='heart' size={30} onPress={onFavorite}/>
+        </Container>
 
-      <Container row={true} style={{ alignItems: 'center', marginTop: 10 }}>
-        <Icon name='location' size={15} color='white'/>
-        <TextRegular size={12} style={{ marginLeft: 5 }}>Local do evento</TextRegular>
-      </Container>
+        <Container row={true} style={{ alignItems: 'center', marginTop: 10 }}>
+          <Icon name='location' size={15} color='white'/>
+          <TextRegular size={12} style={{ marginLeft: 5 }}>Local do evento</TextRegular>
+        </Container>
 
-      <Container row={true} style={{ alignItems: 'center', marginTop: 10 }}>
-        <Icon name='calendar' size={15} color='white'/>
-        <TextRegular size={12} style={{ marginLeft: 5, textTransform: 'capitalize' }}>{formatEventDate()}</TextRegular>
-      </Container>
+        <Container row={true} style={{ alignItems: 'center', marginTop: 10 }}>
+          <Icon name='calendar' size={15} color='white'/>
+          <TextRegular size={12} style={{ marginLeft: 5, textTransform: 'capitalize' }}>{formatEventDate()}</TextRegular>
+        </Container>
 
-      <Container style={{ marginTop: 20 }}>
-        <TextBold size={24} style={{ textAlign: 'left' }}>Descriçao</TextBold>
-        <TextRegular size={13} style={{ textAlign: 'left' }}>{event.description}</TextRegular>
-      </Container>
+        <Container style={{ marginTop: 20 }}>
+          <TextBold size={24} style={{ textAlign: 'left' }}>Descriçao</TextBold>
+          <TextRegular size={13} style={{ textAlign: 'left' }}>{event.description}</TextRegular>
+        </Container>
 
-      <Container style={{ marginTop: 20 }}>
-        <TextBold size={24} style={{ textAlign: 'left' }}>Horário</TextBold>
-        <TextRegular size={13} style={{ textAlign: 'left' }}>{formatEventHour()}</TextRegular>
+        <Container style={{ marginTop: 20 }}>
+          <TextBold size={24} style={{ textAlign: 'left' }}>Horário</TextBold>
+          <TextRegular size={13} style={{ textAlign: 'left' }}>{formatEventHour()}</TextRegular>
+        </Container>
       </Container>
 
       <ShareContainer>

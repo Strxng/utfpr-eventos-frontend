@@ -46,7 +46,7 @@ export const Home = ({ navigation }: any): JSX.Element => {
         <UserHeader />
       </Container>
 
-      <ScrollView style={{ marginBottom: 70, width: '100%' }}>
+      <ScrollView style={{ marginBottom: 70, width: '100%' }} showsVerticalScrollIndicator={false}>
         <Container style={{ marginTop: 10 }}>
           <SearchInput placeholder='Pesquisar evento' />
         </Container>
