@@ -3,14 +3,18 @@ import { IconButton } from 'components/Buttons'
 
 import { Container } from './styles'
 import { View } from 'react-native'
+import { useTheme } from 'styled-components'
+import { ThemeTypeProps } from '../../../../theme'
 
 export const FooterNavigation = ({ navigation }: any): JSX.Element => {
+  const { colors } = useTheme() as ThemeTypeProps
+
   const getActiveRouteName = (): string => {
     return navigation.getState().routeNames[navigation.getState().index]
   }
 
   return (
-    <View style={{ backgroundColor: 'black' }}>
+    <View style={{ backgroundColor: colors.background }}>
       <Container>
         <IconButton
           iconName={'home'}
