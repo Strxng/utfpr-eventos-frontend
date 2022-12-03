@@ -1,5 +1,4 @@
 import React from 'react'
-
 import { Input, StyledIcon, Container } from './styles'
 
 interface SearchInputProps {
@@ -13,7 +12,7 @@ export const SearchInput = ({ value, placeholder, style }: SearchInputProps): JS
     <Container style={style}>
       <Input value={value} placeholder={placeholder} placeholderTextColor={'#b7b7b7'}>
       </Input>
-        <StyledIcon name={'search'} size={25}/>
+      <StyledIcon name={'search'} size={25} />
     </Container>
   )
 }
