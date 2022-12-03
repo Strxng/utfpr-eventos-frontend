@@ -1,18 +1,19 @@
 import styled from 'styled-components/native'
+import { ThemeType } from '../../../../theme'
 
 export const Button = styled.TouchableOpacity`
   display: flex;
   justify-content: center;
   flex-direction: row;
   align-items: center;
-  background-color: #f8c404;
+  background-color: ${({ theme }: ThemeType) => theme.colors.btnColored};
   height: 60px;
   border-radius: 18px;
 `
 
 export const ButtonText = styled.Text`
-  color: white;
-  font-family: 'PlusJakartaSans-Bold';
-  font-size: 18px;
+  color: ${({ theme }: ThemeType) => theme.colors.textSecondary};
+  font-family: ${({ theme }: ThemeType) => theme.font.families.bold};
+  font-size: ${({ theme }: ThemeType) => theme.font.sizes.medium};
   text-align: center;
 `

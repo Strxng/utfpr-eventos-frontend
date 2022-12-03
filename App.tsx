@@ -6,7 +6,7 @@ import { Navigation } from './src/config/navigation'
 import { UserProvider } from './src/contexts/userContext'
 import { ThemeProvider } from 'styled-components'
 import { ToastProvider } from 'react-native-styled-toast'
-import { theme } from './theme'
+import { darkTheme, lightTheme } from './theme'
 
 export default function App(): JSX.Element {
   const [isLoading, setIsLoading] = useState(true)
@@ -27,9 +27,11 @@ export default function App(): JSX.Element {
 
   if (isLoading) return <ActivityIndicator />
 
+  const isDark = false
+
   return (
     <UserProvider>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
         <ToastProvider>
           <Navigation />
         </ToastProvider>

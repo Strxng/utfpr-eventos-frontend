@@ -1,6 +1,8 @@
 import React from 'react'
 import { TouchableOpacity } from 'react-native'
 import { Icon } from 'components/Icon'
+import { useTheme } from 'styled-components'
+import { ThemeTypeProps } from '../../../../theme'
 
 interface IconButtonProps {
   iconName: string
@@ -15,9 +17,11 @@ export const IconButton = ({
   selected = false,
   size = 35
 }: IconButtonProps): JSX.Element => {
+  const { colors } = useTheme() as ThemeTypeProps
+
   return (
     <TouchableOpacity onPress={onPress}>
-      <Icon name={iconName} size={size} color={selected ? '#F6C500' : 'white'}/>
+      <Icon name={iconName} size={size} color={selected ? '#F6C500' : colors.btnPrimary} />
     </TouchableOpacity>
   )
 }
