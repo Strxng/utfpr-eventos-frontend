@@ -5,36 +5,44 @@ import { TextBold, TextRegular } from 'components/Texts'
 import { truncateString } from '../utils'
 import { CardButton, DateContainer, IconButton, IconWithTextContainer, ImageContainer, TextContainer } from './styles'
 import { useNavigation } from '@react-navigation/native'
+import { useTheme } from 'styled-components'
+import { ThemeTypeProps } from '../../../../theme'
+import { ImageBackground } from 'react-native'
 
 interface FavoriteEventCardProps {
   eventDate: Date
   eventName: string
   eventLocal: string
+  eventImage: string
 }
 
-export const FavoriteEventCard = ({ eventDate, eventName, eventLocal }: FavoriteEventCardProps): JSX.Element => {
+export const FavoriteEventCard = ({ eventDate, eventName, eventLocal, eventImage }: FavoriteEventCardProps): JSX.Element => {
   const { navigate } = useNavigation()
+  const { colors } = useTheme() as ThemeTypeProps
+
   return (
-      <CardButton onPress={() => navigate('Event')}>
-        <ImageContainer>
+    <CardButton onPress={() => navigate('Event')}>
+      <ImageContainer>
+        <ImageBackground source={{ uri: eventImage }} resizeMode='cover' style={{ flex: 1, justifyContent: 'center' }} imageStyle={{ borderTopLeftRadius: 18, borderTopRightRadius: 18, borderBottomLeftRadius: 18, borderBottomRightRadius: 18 }}>
           <DateContainer>
-            <Icon name="calendar" color='white' />
+            <Icon name="calendar" color={colors.textPrimary} />
             <TextRegular size={10} style={{ marginLeft: 8 }}>{moment(eventDate).format('DD/MM/YYYY')}</TextRegular>
           </DateContainer>
-        </ImageContainer>
+        </ImageBackground>
+      </ImageContainer>
 
-        <TextContainer>
-          <TextBold>{truncateString({ string: eventName, limit: 14 })}</TextBold>
+      <TextContainer>
+        <TextBold>{truncateString({ string: eventName, limit: 14 })}</TextBold>
 
-          <IconWithTextContainer>
-            <TextRegular><Icon name="location"/></TextRegular>
-            <TextRegular size={12} style={{ marginLeft: 5 }}>{truncateString({ string: eventLocal, limit: 18 })}</TextRegular>
-          </IconWithTextContainer>
-        </TextContainer>
+        <IconWithTextContainer>
+          <TextRegular><Icon name="location" /></TextRegular>
+          <TextRegular size={12} style={{ marginLeft: 5 }}>{truncateString({ string: eventLocal, limit: 18 })}</TextRegular>
+        </IconWithTextContainer>
+      </TextContainer>
 
-        <IconButton>
-          <Icon name="heart" size={45} color="yellow"/>
-        </IconButton>
-      </CardButton>
+      <IconButton>
+        <Icon name="heart" size={45} color={'yellow'} />
+      </IconButton>
+    </CardButton>
   )
 }

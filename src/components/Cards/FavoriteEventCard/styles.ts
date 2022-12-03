@@ -1,10 +1,10 @@
 import styled from 'styled-components/native'
+import { ThemeType } from '../../../../theme'
 
 export const ImageContainer = styled.View`
   width: 110px;
   height: 100px;
   border-radius: 18px;
-  background-color: #d9d9d9;
 `
 
 export const DateContainer = styled.View`
@@ -18,7 +18,7 @@ export const DateContainer = styled.View`
   width: 90px;
   padding: 0px 10px;
   border-radius: 12px;
-  background-color: #b9b9b9;
+  background-color: ${({ theme }: ThemeType) => theme.colors.lightBackground};
   justify-content: center;
 `
 
@@ -45,7 +45,7 @@ export const CardButton = styled.TouchableOpacity`
   display: flex;
   flex-direction: row;
   align-items: center;
-  background-color: #252525;
+  background-color: ${({ theme }: ThemeType) => theme.colors.lightBackground};
   height: 100px;
   width: 100%;
   border-radius: 18px;
