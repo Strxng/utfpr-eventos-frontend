@@ -24,6 +24,13 @@ export const Home = ({ navigation }: any): JSX.Element => {
   const handleCardPress = (event: Event): void => {
     navigation.navigate('Event', { event })
   }
+  const applyMarginRight = (index: number, length: number): {} => {
+    const style = index !== length - 1
+      ? { marginRight: 20 }
+      : { marginRight: 0 }
+
+    return style
+  }
 
   useEffect(() => {
     homeScreenDataService(selectedCategory).then((screenDataResponse) => {
@@ -55,17 +62,21 @@ export const Home = ({ navigation }: any): JSX.Element => {
               style={{ maxHeight: 60 }}
             >
               <Container row={true} style={{ paddingRight: 0, marginTop: 20 }}>
-                {categories.map((category) => (
+                {categories.map((category, index) => {
+                  const dinamicStyle = applyMarginRight(index, categories.length)
+
+                  return (
                   <SmallTextCard
                     key={category.id}
                     text={category.name}
                     selected={selectedCategory === category.id}
-                    style={{ marginRight: 10 }}
+                    style={dinamicStyle}
                     onPress={() => {
                       setSelectedCategory(category.id)
                     }}
                   />
-                ))}
+                  )
+                })}
               </Container>
             </ScrollView>
           </>
@@ -82,7 +93,10 @@ export const Home = ({ navigation }: any): JSX.Element => {
         >
           <Container row={true} style={{ paddingRight: 0, marginTop: 20 }}>
             {popularEvents.length > 0
-              ? popularEvents.map((event) => (
+              ? popularEvents.map((event, index) => {
+                const dinamicStyle = applyMarginRight(index, popularEvents.length)
+
+                return (
                 <EventCard
                   key={event.id}
                   eventName={event.name}
@@ -90,12 +104,13 @@ export const Home = ({ navigation }: any): JSX.Element => {
                   eventLocal={event.local}
                   eventImage={event.image}
                   onPress={() => handleCardPress(event)}
-                  style={{ marginRight: 20 }}
+                  style={dinamicStyle}
                 />
-              ))
+                )
+              })
               : (
                 <TextRegular>Nenhum evento encontrado</TextRegular>
-              )}
+                )}
           </Container>
         </ScrollView>
 
@@ -110,21 +125,25 @@ export const Home = ({ navigation }: any): JSX.Element => {
         >
           <Container row={true} style={{ paddingRight: 0, marginTop: 20 }}>
             {weekEvents.length > 0
-              ? weekEvents.map((event) => (
+              ? weekEvents.map((event, index) => {
+                const dinamicStyle = applyMarginRight(index, weekEvents.length)
+
+                return (
                 <EventCard
                   key={event.id}
                   eventName={event.name}
                   eventDate={event.startDate}
                   eventLocal={event.local}
                   eventImage={event.image}
-                  style={{ marginRight: 20 }}
+                  style={dinamicStyle}
                   onPress={() => handleCardPress(event)}
                   small={true}
                 />
-              ))
+                )
+              })
               : (
                 <TextRegular>Nenhum evento encontrado</TextRegular>
-              )}
+                )}
           </Container>
         </ScrollView>
       </ScrollView>

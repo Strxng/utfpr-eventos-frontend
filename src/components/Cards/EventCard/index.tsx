@@ -14,7 +14,7 @@ interface EventCardProps {
   small?: boolean
   eventImage?: string
   onPress?: () => void
-  style: {}
+  style?: {}
 }
 
 export const EventCard = ({ eventName, eventLocal, eventImage, eventDate, small = false, style, onPress = () => {} }: EventCardProps): JSX.Element => {
@@ -36,7 +36,7 @@ export const EventCard = ({ eventName, eventLocal, eventImage, eventDate, small 
 
   return (
     <TouchableOpacity onPress={onPress}>
-      <Container style={{ width: small ? 170 : 280, ...style }}>
+      <Container style={{ width: small ? 190 : 280, ...style }}>
         <ImageBackground source={{ uri: eventImage }} resizeMode='cover' style={{ flex: 1, justifyContent: 'center' }} imageStyle={{ borderTopLeftRadius: 18, borderTopRightRadius: 18 }}>
           <DateContainer>
             <Icon name="calendar" color='white' />

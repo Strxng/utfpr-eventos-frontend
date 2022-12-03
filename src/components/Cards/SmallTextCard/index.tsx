@@ -8,7 +8,7 @@ import { GestureResponderEvent } from 'react-native'
 interface SmallTextCardProps {
   text: string
   selected: boolean
-  style: {}
+  style?: {}
   onPress?: (event: GestureResponderEvent) => void
 }
 
