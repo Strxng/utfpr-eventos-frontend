@@ -1,5 +1,6 @@
 import { useToast as useToastReactNativeStyled } from 'react-native-styled-toast'
-import { theme } from '../../theme'
+import { useTheme } from 'styled-components'
+import { ThemeTypeProps } from '../../theme'
 
 interface useToastReturn {
   notifySuccess: (msg: string) => void
@@ -8,16 +9,15 @@ interface useToastReturn {
 
 export const useToast = (): useToastReturn => {
   const { toast } = useToastReactNativeStyled()
+  const { colors } = useTheme() as ThemeTypeProps
 
   const notifySuccess = (msg: string): void => {
     toast({
       message: msg,
       hideCloseIcon: true,
-      closeButtonStyles: {
-        bg: '#000'
-      },
       toastStyles: {
-        bg: '#171717'
+        bg: colors.lightBackground,
+        borderColor: 'transparent'
       }
     })
   }
@@ -26,14 +26,13 @@ export const useToast = (): useToastReturn => {
     toast({
       message: msg,
       iconName: 'x-circle',
-      accentColor: theme.colors.error,
-      iconColor: theme.colors.error,
+      accentColor: colors.error,
+      iconColor: colors.error,
       hideCloseIcon: true,
-      closeButtonStyles: {
-        bg: '#000'
-      },
+      color: colors.textPrimary,
       toastStyles: {
-        bg: '#171717'
+        bg: colors.lightBackground,
+        borderColor: 'transparent'
       }
     })
   }
