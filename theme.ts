@@ -47,12 +47,12 @@ export const lightTheme = {
       bold: 'PlusJakartaSans-Bold'
     },
     sizes: {
-      extraSmall: '14px',
-      small: '16px',
-      medium: '18px',
-      large: '20px',
-      extraLarge: '24px',
-      big: '30px'
+      extraSmall: 14,
+      small: 16,
+      medium: 18,
+      large: 20,
+      extraLarge: 24,
+      big: 30
     }
   }
 }
@@ -77,12 +77,12 @@ export interface ThemeTypeProps {
       bold: string
     }
     sizes: {
-      extraSmall: string
-      small: string
-      medium: string
-      large: string
-      extraLarge: string
-      big: string
+      extraSmall: number
+      small: number
+      medium: number
+      large: number
+      extraLarge: number
+      big: number
     }
   }
 }

@@ -5,17 +5,19 @@ import moment from 'moment'
 import 'moment/locale/pt-br'
 
 import { Container, DateContainer, Footer } from './styles'
-import { TouchableOpacity } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
+import { ImageBackground, TouchableOpacity } from 'react-native'
+import { ThemeTypeProps } from '../../../../theme'
+import { useTheme } from 'styled-components'
 
 interface SimpleEventCardProps {
   eventName: string
   eventDate: Date
+  eventImage: string
   style?: {}
 }
 
-export const SimpleEventCard = ({ eventName, eventDate, style }: SimpleEventCardProps): JSX.Element => {
-  const { navigate } = useNavigation()
+export const SimpleEventCard = ({ eventName, eventDate, eventImage, style }: SimpleEventCardProps): JSX.Element => {
+  const { font } = useTheme() as ThemeTypeProps
 
   const formatEventDate = (): string => {
     moment.locale('pt-br')
@@ -27,12 +29,13 @@ export const SimpleEventCard = ({ eventName, eventDate, style }: SimpleEventCard
   }
 
   return (
-    <TouchableOpacity onPress={() => { navigate('Event') }}>
+    <TouchableOpacity onPress={() => { }}>
       <Container style={style}>
+        <ImageBackground source={{ uri: eventImage }} resizeMode='cover' style={{ flex: 1, justifyContent: 'center' }} imageStyle={{ borderTopLeftRadius: 18, borderTopRightRadius: 18 }} />
         <Footer>
-          <TextBold size={18} style={{ textAlign: 'left' }}>{formatEventName()}</TextBold>
+          <TextBold size={font.sizes.medium} style={{ textAlign: 'left' }}>{formatEventName()}</TextBold>
           <DateContainer>
-            <TextRegular size={12} style={{ color: '#76777C', textTransform: 'capitalize' }}>{formatEventDate()}</TextRegular>
+            <TextRegular size={font.sizes.extraSmall} style={{ textTransform: 'capitalize' }}>{formatEventDate()}</TextRegular>
           </DateContainer>
         </Footer>
       </Container>

@@ -4,6 +4,8 @@ import { truncateString } from '../utils'
 
 import { Container } from './styles'
 import { GestureResponderEvent } from 'react-native'
+import { useTheme } from 'styled-components'
+import { ThemeTypeProps } from '../../../../theme'
 
 interface SmallTextCardProps {
   text: string
@@ -12,9 +14,11 @@ interface SmallTextCardProps {
   onPress?: (event: GestureResponderEvent) => void
 }
 
-export const SmallTextCard = ({ text, selected = false, style, onPress = () => {} }: SmallTextCardProps): JSX.Element => {
+export const SmallTextCard = ({ text, selected = false, style, onPress = () => { } }: SmallTextCardProps): JSX.Element => {
+  const { colors } = useTheme() as ThemeTypeProps
+
   return (
-    <Container style={{ ...style, backgroundColor: selected ? '#f8c404' : '#282424' }} onTouchStart={onPress}>
+    <Container style={{ ...style, backgroundColor: selected ? colors.btnColored : colors.lightBackground }} onTouchStart={onPress}>
       <TextRegular size={12}>{truncateString({ string: text, limit: 18 })}</TextRegular>
     </Container>
   )

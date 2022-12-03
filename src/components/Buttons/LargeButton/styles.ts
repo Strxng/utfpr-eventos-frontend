@@ -14,6 +14,6 @@ export const Button = styled.TouchableOpacity`
 export const ButtonText = styled.Text`
   color: ${({ theme }: ThemeType) => theme.colors.textSecondary};
   font-family: ${({ theme }: ThemeType) => theme.font.families.bold};
-  font-size: ${({ theme }: ThemeType) => theme.font.sizes.medium};
+  font-size: ${({ theme }: ThemeType) => theme.font.sizes.medium + 'px'};
   text-align: center;
 `
