@@ -1,4 +1,4 @@
-import { mainApiGet, mainApiPost } from 'api/mainApi'
+import { mainApiDelete, mainApiGet, mainApiPost } from 'api/mainApi'
 import { destroyUserTokenStore, saveUserTokenStore } from 'storage/userStorage'
 
 interface AcessToken {
@@ -63,4 +63,8 @@ export const logoutUserService = async (): Promise<void> => {
 
 export const favoriteService = async (eventId: string): Promise<void> => {
   await mainApiPost('event/favorite', { eventId })
+}
+
+export const unfavoriteService = async (eventId: string): Promise<void> => {
+  await mainApiDelete(`event/favorite/${eventId}`)
 }

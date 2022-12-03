@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { ActivityIndicator } from 'react-native'
+import { ActivityIndicator, LogBox } from 'react-native'
 import * as Font from 'expo-font'
 
 import { Navigation } from './src/config/navigation'
@@ -10,8 +10,13 @@ import { darkTheme, lightTheme } from './theme'
 
 export default function App(): JSX.Element {
   const [isLoading, setIsLoading] = useState(true)
+  const isDark = true
 
   const initApp = useCallback(async () => {
+    LogBox.ignoreLogs([
+      'Non-serializable values were found in the navigation state'
+    ])
+
     await Font.loadAsync({
       'PlusJakartaSans-Bold': require('./assets/fonts/PlusJakartaSans-Bold.ttf'),
       'PlusJakartaSans-Medium': require('./assets/fonts/PlusJakartaSans-Medium.ttf'),
@@ -26,8 +31,6 @@ export default function App(): JSX.Element {
   }, [])
 
   if (isLoading) return <ActivityIndicator />
-
-  const isDark = true
 
   return (
     <UserProvider>

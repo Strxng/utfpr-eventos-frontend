@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { FullPage, Container } from 'components/Wrappers'
 import { UserHeader } from 'components/Headers'
 import { SearchInput } from 'components/Inputs'
@@ -12,18 +12,13 @@ import { useToast } from 'hooks/useToast'
 export const Home = ({ navigation }: any): JSX.Element => {
   const [screenData, setScreenData] = useState<HomeScreenDataResponse | null>(null)
   const [selectedCategory, setSelectedCategory] = useState<string>('')
+  const [isLoading, setIsloading] = useState<boolean>(false)
   const { notifyError } = useToast()
 
   const categories = screenData?.courses ?? []
   const popularEvents = screenData?.popularEvents ?? []
   const weekEvents = screenData?.weekEvents ?? []
 
-  const handleSeeAllPress = (): void => {
-    navigation.navigate('Filter')
-  }
-  const handleCardPress = (event: Event): void => {
-    navigation.navigate('Event', { event })
-  }
   const applyMarginRight = (index: number, length: number): {} => {
     const style = index !== length - 1
       ? { marginRight: 20 }
@@ -32,16 +27,31 @@ export const Home = ({ navigation }: any): JSX.Element => {
     return style
   }
 
-  useEffect(() => {
+  const refreshData = useCallback(() => {
+    setIsloading(true)
+
     homeScreenDataService(selectedCategory).then((screenDataResponse) => {
       setScreenData({ ...screenDataResponse, courses: [{ id: '', name: 'Todos os cursos' }, ...screenDataResponse.courses] })
+      setIsloading(false)
     }).catch(() => {
       notifyError('Não foi possível buscar os eventos')
+      setIsloading(false)
     })
   }, [selectedCategory])
 
+  const handleSeeAllPress = (): void => {
+    navigation.navigate('Filter')
+  }
+  const handleCardPress = (event: Event): void => {
+    navigation.navigate('Event', { event, onGoBack: () => refreshData() })
+  }
+
+  useEffect(() => {
+    refreshData()
+  }, [selectedCategory])
+
   return (
-    <FullPage spaceTop={true}>
+    <FullPage spaceTop={true} isLoading={isLoading}>
       <Container>
         <UserHeader />
       </Container>
@@ -66,15 +76,15 @@ export const Home = ({ navigation }: any): JSX.Element => {
                   const dinamicStyle = applyMarginRight(index, categories.length)
 
                   return (
-                  <SmallTextCard
-                    key={category.id}
-                    text={category.name}
-                    selected={selectedCategory === category.id}
-                    style={dinamicStyle}
-                    onPress={() => {
-                      setSelectedCategory(category.id)
-                    }}
-                  />
+                    <SmallTextCard
+                      key={category.id}
+                      text={category.name}
+                      selected={selectedCategory === category.id}
+                      style={dinamicStyle}
+                      onPress={() => {
+                        setSelectedCategory(category.id)
+                      }}
+                    />
                   )
                 })}
               </Container>
@@ -97,20 +107,20 @@ export const Home = ({ navigation }: any): JSX.Element => {
                 const dinamicStyle = applyMarginRight(index, popularEvents.length)
 
                 return (
-                <EventCard
-                  key={event.id}
-                  eventName={event.name}
-                  eventDate={event.startDate}
-                  eventLocal={event.local}
-                  eventImage={event.image}
-                  onPress={() => handleCardPress(event)}
-                  style={dinamicStyle}
-                />
+                  <EventCard
+                    key={event.id}
+                    eventName={event.name}
+                    eventDate={event.startDate}
+                    eventLocal={event.local}
+                    eventImage={event.image}
+                    onPress={() => handleCardPress(event)}
+                    style={dinamicStyle}
+                  />
                 )
               })
               : (
                 <TextRegular>Nenhum evento encontrado</TextRegular>
-                )}
+              )}
           </Container>
         </ScrollView>
 
@@ -129,21 +139,21 @@ export const Home = ({ navigation }: any): JSX.Element => {
                 const dinamicStyle = applyMarginRight(index, weekEvents.length)
 
                 return (
-                <EventCard
-                  key={event.id}
-                  eventName={event.name}
-                  eventDate={event.startDate}
-                  eventLocal={event.local}
-                  eventImage={event.image}
-                  style={dinamicStyle}
-                  onPress={() => handleCardPress(event)}
-                  small={true}
-                />
+                  <EventCard
+                    key={event.id}
+                    eventName={event.name}
+                    eventDate={event.startDate}
+                    eventLocal={event.local}
+                    eventImage={event.image}
+                    style={dinamicStyle}
+                    onPress={() => handleCardPress(event)}
+                    small={true}
+                  />
                 )
               })
               : (
                 <TextRegular>Nenhum evento encontrado</TextRegular>
-                )}
+              )}
           </Container>
         </ScrollView>
       </ScrollView>

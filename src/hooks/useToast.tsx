@@ -15,6 +15,7 @@ export const useToast = (): useToastReturn => {
     toast({
       message: msg,
       hideCloseIcon: true,
+      color: colors.textPrimary,
       toastStyles: {
         bg: colors.lightBackground,
         borderColor: 'transparent'

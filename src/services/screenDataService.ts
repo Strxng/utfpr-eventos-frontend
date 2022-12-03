@@ -29,6 +29,7 @@ export interface Event {
   local: string
   courseId: string
   course: string
+  isFavorite: boolean
 }
 export interface SignupScreenDataResponse {
   genres: Genre[]

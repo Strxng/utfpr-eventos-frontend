@@ -1,8 +1,10 @@
 import React from 'react'
+import Spinner from 'react-native-loading-spinner-overlay'
 
 import { ContentContainer } from './styles'
 
 interface FullPageProps {
+  isLoading?: boolean
   center?: boolean
   style?: {}
   spaceTop?: boolean
@@ -10,7 +12,7 @@ interface FullPageProps {
   defaultPadding?: boolean
 }
 
-export const FullPage = ({ center = false, style, spaceTop = false, children, defaultPadding = true }: FullPageProps): JSX.Element => {
+export const FullPage = ({ center = false, isLoading = false, style, spaceTop = false, children, defaultPadding = true }: FullPageProps): JSX.Element => {
   const styles = {
     ...style,
     justifyContent: center ? 'center' : 'flex-start',
@@ -20,6 +22,9 @@ export const FullPage = ({ center = false, style, spaceTop = false, children, de
   }
 
   return (
-    <ContentContainer style={styles}>{children}</ContentContainer>
+    <ContentContainer style={styles}>
+      <Spinner visible={isLoading} />
+      {children}
+    </ContentContainer>
   )
 }

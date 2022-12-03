@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 import { Container, FullPage } from 'components/Wrappers'
 import { IconButton, LargeButton } from 'components/Buttons'
 import { TextBold, TextRegular } from 'components/Texts'
@@ -12,7 +12,7 @@ import {
   ShareContainer
 } from './styles'
 import { BackButton } from 'components/Headers'
-import { favoriteService } from 'services/userService'
+import { favoriteService, unfavoriteService } from 'services/userService'
 import { Event as EventInterface } from 'services/screenDataService'
 import { ImageBackground } from 'react-native'
 import { useToast } from 'hooks/useToast'
@@ -25,9 +25,10 @@ interface EventProps {
 }
 
 export const Event = (props: EventProps): JSX.Element => {
-  const { notifyError } = useToast()
-
   const event = props.route.params.event
+  const [isFavorite, setIsFavorite] = useState<boolean>(event.isFavorite)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const { notifyError, notifySuccess } = useToast()
 
   const formatEventDate = (): string => {
     moment.locale('pt-br')
@@ -39,15 +40,31 @@ export const Event = (props: EventProps): JSX.Element => {
   }
 
   const onFavorite = useCallback(() => {
-    favoriteService(event.id).then(() => {
-      // pinta o coracao
-    }).catch(() => {
-      notifyError('Falha ao favoritar o evento')
-    })
-  }, [])
+    setIsLoading(true)
+
+    if (!isFavorite) {
+      favoriteService(event.id).then(() => {
+        notifySuccess('Evento favoritado com sucesso')
+        setIsFavorite(true)
+        setIsLoading(false)
+      }).catch(() => {
+        notifyError('Falha ao favoritar o evento')
+        setIsLoading(false)
+      })
+    } else {
+      unfavoriteService(event.id).then(() => {
+        notifySuccess('Evento desfavoritado com sucesso')
+        setIsFavorite(false)
+        setIsLoading(false)
+      }).catch(() => {
+        notifyError('Falha ao desfavoritar o evento')
+        setIsLoading(false)
+      })
+    }
+  }, [isFavorite])
 
   return (
-    <FullPage defaultPadding={false}>
+    <FullPage defaultPadding={false} isLoading={isLoading}>
       <BackButton />
       <BannerContainer>
         <ImageBackground source={{ uri: event.image }} resizeMode='cover' style={{ flex: 1, justifyContent: 'center' }} />
@@ -56,16 +73,16 @@ export const Event = (props: EventProps): JSX.Element => {
       <Container style={{ paddingLeft: 20, paddingRight: 20 }}>
         <Container row={true} style={{ justifyContent: 'space-between', marginTop: 20, marginBottom: 10, alignItems: 'center' }}>
           <TextBold size={24} style={{ textAlign: 'left' }}>{event.name}</TextBold>
-          <IconButton iconName='heart' size={30} onPress={onFavorite}/>
+          <IconButton iconName='heart' size={30} onPress={onFavorite} selected={isFavorite} />
         </Container>
 
         <Container row={true} style={{ alignItems: 'center', marginTop: 10 }}>
-          <Icon name='location' size={15} color='white'/>
+          <Icon name='location' size={15} color='white' />
           <TextRegular size={12} style={{ marginLeft: 5 }}>Local do evento</TextRegular>
         </Container>
 
         <Container row={true} style={{ alignItems: 'center', marginTop: 10 }}>
-          <Icon name='calendar' size={15} color='white'/>
+          <Icon name='calendar' size={15} color='white' />
           <TextRegular size={12} style={{ marginLeft: 5, textTransform: 'capitalize' }}>{formatEventDate()}</TextRegular>
         </Container>
 
@@ -81,7 +98,7 @@ export const Event = (props: EventProps): JSX.Element => {
       </Container>
 
       <ShareContainer>
-        <LargeButton text='Compartilhar' iconName='share'/>
+        <LargeButton text='Compartilhar' iconName='share' />
       </ShareContainer>
     </FullPage>
   )
