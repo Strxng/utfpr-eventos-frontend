@@ -10,6 +10,7 @@ import { authService } from 'services/userService'
 import { useUserContext } from 'contexts/userContext'
 import { signinSchema } from './validationSchema'
 import { useToast } from 'hooks/useToast'
+import { useState } from 'react'
 interface SignInProps {
   navigation: any
 }
@@ -20,20 +21,25 @@ interface SubmitParams {
 }
 
 export const SignIn = ({ navigation }: SignInProps): JSX.Element => {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const { setUser } = useUserContext()
   const { notifyError } = useToast()
 
   const onSubmit = useCallback(({ email, password }: SubmitParams) => {
+    setIsLoading(true)
+
     authService({ email, password }).then((user) => {
       setUser(user)
+      setIsLoading(false)
       navigation.navigate('Home')
     }).catch((err) => {
+      setIsLoading(false)
       notifyError(err.message)
     })
   }, [])
 
   return (
-    <FullPage center={true}>
+    <FullPage center={true} isLoading={isLoading}>
       <Container>
         <TextRegular size={25}>Olá!</TextRegular>
         <TextMedium size={30}>Faça seu login</TextMedium>
