@@ -2,7 +2,7 @@ import { FavoriteEventCard } from 'components/Cards'
 import { TextRegular, TextMedium } from 'components/Texts'
 import { Container, FullPage, MarginWrapper } from 'components/Wrappers'
 import { useToast } from 'hooks/useToast'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { ScrollView } from 'react-native'
 import { Event } from 'services/screenDataService'
 import { getFavoriteEvents } from 'services/userService'
@@ -20,7 +20,7 @@ export const Favorites = ({ navigation }: FavoritesProps): JSX.Element => {
   const { notifyError } = useToast()
   const { font } = useTheme() as ThemeTypeProps
 
-  useEffect(() => {
+  const getFavorites = useCallback(() => {
     setIsLoading(true)
 
     getFavoriteEvents().then((eventsResponse) => {
@@ -31,6 +31,10 @@ export const Favorites = ({ navigation }: FavoritesProps): JSX.Element => {
       setIsLoading(false)
       notifyError(err.message)
     })
+  }, [])
+
+  useEffect(() => {
+    getFavorites()
   }, [])
 
   return (
@@ -49,7 +53,9 @@ export const Favorites = ({ navigation }: FavoritesProps): JSX.Element => {
                 eventName={event.name}
                 eventImage={event.image}
                 onPress={() => {
-                  navigation.navigate('Event', { event: { ...event, isFavorite: true } })
+                  navigation.navigate('Event', {
+                    event: { ...event, isFavorite: true }, onGoBack: () => getFavorites()
+                  })
                 }}
               />
             </MarginWrapper>

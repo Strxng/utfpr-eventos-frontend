@@ -10,7 +10,7 @@ import { darkTheme, lightTheme } from './theme'
 
 export default function App(): JSX.Element {
   const [isLoading, setIsLoading] = useState(true)
-  const isDark = true
+  const isDark = false
 
   const initApp = useCallback(async () => {
     LogBox.ignoreLogs([

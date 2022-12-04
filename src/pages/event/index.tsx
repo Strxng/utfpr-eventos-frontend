@@ -16,6 +16,8 @@ import { favoriteService, unfavoriteService } from 'services/userService'
 import { Event as EventInterface } from 'services/screenDataService'
 import { ImageBackground } from 'react-native'
 import { useToast } from 'hooks/useToast'
+import { useTheme } from 'styled-components'
+import { ThemeTypeProps } from '../../../theme'
 interface EventProps {
   route: {
     params: {
@@ -29,6 +31,7 @@ export const Event = (props: EventProps): JSX.Element => {
   const [isFavorite, setIsFavorite] = useState<boolean>(event.isFavorite)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const { notifyError, notifySuccess } = useToast()
+  const { colors } = useTheme() as ThemeTypeProps
 
   const formatEventDate = (): string => {
     moment.locale('pt-br')
@@ -77,12 +80,12 @@ export const Event = (props: EventProps): JSX.Element => {
         </Container>
 
         <Container row={true} style={{ alignItems: 'center', marginTop: 10 }}>
-          <Icon name='location' size={15} color='white' />
-          <TextRegular size={12} style={{ marginLeft: 5 }}>Local do evento</TextRegular>
+          <Icon name='location' size={15} color={colors.textPrimary} />
+          <TextRegular size={12} style={{ marginLeft: 5 }}>{event.local}</TextRegular>
         </Container>
 
         <Container row={true} style={{ alignItems: 'center', marginTop: 10 }}>
-          <Icon name='calendar' size={15} color='white' />
+          <Icon name='calendar' size={15} color={colors.textPrimary} />
           <TextRegular size={12} style={{ marginLeft: 5, textTransform: 'capitalize' }}>{formatEventDate()}</TextRegular>
         </Container>
 

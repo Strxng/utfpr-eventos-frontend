@@ -13,9 +13,9 @@ const Tab = createBottomTabNavigator()
 const TabNavigation = (): JSX.Element => {
   return (
     <Tab.Navigator initialRouteName='HomeTab' screenOptions={{ headerShown: false }} tabBar={(props) => <FooterNavigation {...props} />}>
-      <Tab.Screen name='HomeTab' component={Home}/>
-      <Tab.Screen name='FavoritesTab' component={Favorites}/>
-      <Tab.Screen name='ProfileTab' component={Profile}/>
+      <Tab.Screen name='HomeTab' component={Home} />
+      <Tab.Screen name='FavoritesTab' component={Favorites} options={{ unmountOnBlur: true }} />
+      <Tab.Screen name='ProfileTab' component={Profile} />
     </Tab.Navigator>
   )
 }
@@ -24,12 +24,12 @@ export const Navigation = (): JSX.Element => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Initial' screenOptions={{ headerShown: false }}>
-        <Stack.Screen name='Home' component={TabNavigation}/>
-        <Stack.Screen name='Initial' component={Initial}/>
-        <Stack.Screen name='SignIn' component={SignIn}/>
-        <Stack.Screen name='SignUp' component={SignUp}/>
-        <Stack.Screen name='Filter' component={Filter}/>
-        <Stack.Screen name='Event' component={Event}/>
+        <Stack.Screen name='Home' component={TabNavigation} />
+        <Stack.Screen name='Initial' component={Initial} />
+        <Stack.Screen name='SignIn' component={SignIn} />
+        <Stack.Screen name='SignUp' component={SignUp} />
+        <Stack.Screen name='Filter' component={Filter} />
+        <Stack.Screen name='Event' component={Event} />
       </Stack.Navigator>
     </NavigationContainer>
   )
