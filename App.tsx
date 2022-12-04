@@ -7,12 +7,18 @@ import { UserProvider } from './src/contexts/userContext'
 import { ThemeProvider } from 'styled-components'
 import { ToastProvider } from 'react-native-styled-toast'
 import { darkTheme, lightTheme } from './theme'
+import { findThemeStore } from 'storage/configStorage'
 
 export default function App(): JSX.Element {
-  const [isLoading, setIsLoading] = useState(true)
-  const isDark = false
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [isDark, setIsDark] = useState<boolean>(false)
 
   const initApp = useCallback(async () => {
+    const theme = await findThemeStore()
+    if (theme === 'dark') {
+      setIsDark(true)
+    }
+
     LogBox.ignoreLogs([
       'Non-serializable values were found in the navigation state'
     ])
