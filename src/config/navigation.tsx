@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 import { Home, Initial, SignIn, SignUp, Profile, Favorites, Event, EventList } from 'pages'
 import { FooterNavigation } from 'components/Footers'
+import { EventSearch } from 'pages/eventSearch'
 
 const Stack = createNativeStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -28,8 +29,9 @@ export const Navigation = (): JSX.Element => {
         <Stack.Screen name='Initial' component={Initial} />
         <Stack.Screen name='SignIn' component={SignIn} />
         <Stack.Screen name='SignUp' component={SignUp} />
-        <Stack.Screen name='Filter' component={EventList} />
         <Stack.Screen name='Event' component={Event} />
+        <Stack.Screen name='EventList' component={EventList} />
+        <Stack.Screen name='EventSearch' component={EventSearch} />
       </Stack.Navigator>
     </NavigationContainer>
   )

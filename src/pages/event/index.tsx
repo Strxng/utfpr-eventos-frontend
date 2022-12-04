@@ -3,21 +3,20 @@ import { Container, FullPage } from 'components/Wrappers'
 import { IconButton, LargeButton } from 'components/Buttons'
 import { TextBold, TextRegular } from 'components/Texts'
 import { Icon } from 'components/Icon'
-
 import moment from 'moment'
 import 'moment/locale/pt-br'
-
+import { BackButton } from 'components/Headers'
+import { favoriteService, unfavoriteService } from 'services/userService'
+import { ImageBackground, Share } from 'react-native'
+import { useToast } from 'hooks/useToast'
+import { useTheme } from 'styled-components'
+import { ThemeTypeProps } from '../../../theme'
+import { Event as EventInterface } from 'services/eventService'
 import {
   BannerContainer,
   ShareContainer
 } from './styles'
-import { BackButton } from 'components/Headers'
-import { favoriteService, unfavoriteService } from 'services/userService'
-import { Event as EventInterface } from 'services/screenDataService'
-import { ImageBackground } from 'react-native'
-import { useToast } from 'hooks/useToast'
-import { useTheme } from 'styled-components'
-import { ThemeTypeProps } from '../../../theme'
+
 interface EventProps {
   route: {
     params: {
@@ -66,6 +65,12 @@ export const Event = (props: EventProps): JSX.Element => {
     }
   }, [isFavorite])
 
+  const onPressShareButton = useCallback(() => {
+    Share.share({
+      message: `Já viu o *${event.name}* que tá lá no app *UTFPR Eventos?*\n\nBaixa aí: https://finge-que-e-o-link-pra-baixar-o-app.com`
+    }).then(() => {}).catch(() => {})
+  }, [])
+
   return (
     <FullPage defaultPadding={false} isLoading={isLoading}>
       <BackButton />
@@ -106,7 +111,7 @@ export const Event = (props: EventProps): JSX.Element => {
       </Container>
 
       <ShareContainer>
-        <LargeButton text='Compartilhar' iconName='share' />
+        <LargeButton text='Compartilhar' iconName='share' onPress={onPressShareButton} />
       </ShareContainer>
     </FullPage>
   )

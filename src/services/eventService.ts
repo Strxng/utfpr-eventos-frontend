@@ -16,11 +16,11 @@ export interface Event {
 }
 
 interface GetEventsServiceProps {
-  page: number
-  limit: number
-  search: string
-  campusId: string
-  courseId: string
+  page?: number
+  limit?: number
+  search?: string
+  campusId?: string
+  courseId?: string
   eventType?: 'week' | 'popular'
 }
 
@@ -34,9 +34,9 @@ export const getEventsService = async ({
 }: GetEventsServiceProps): Promise<Event[]> => {
   let url: string
   if (eventType) {
-    url = `event/${eventType}?page=${page}&limit=${limit}&search=${search}&campusId=${campusId}&courseId=${courseId}`
+    url = `event/${eventType}?page=${page ?? ''}&limit=${limit ?? ''}&search=${search ?? ''}&campusId=${campusId ?? ''}&courseId=${courseId ?? ''}`
   } else {
-    url = `event?page=${page}&limit=${limit}&search=${search}&campusId=${campusId}&courseId=${courseId}`
+    url = `event?page=${page ?? ''}&limit=${limit ?? ''}&search=${search ?? ''}&campusId=${campusId ?? ''}&courseId=${courseId ?? ''}`
   }
 
   const { data: events } = await mainApiGet(url)

@@ -2,12 +2,13 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { FullPage, Container } from 'components/Wrappers'
 import { UserHeader } from 'components/Headers'
 import { SearchInput } from 'components/Inputs'
-import { ScrollView } from 'react-native'
+import { ScrollView, TouchableOpacity } from 'react-native'
 import { TextBold, TextRegular } from 'components/Texts'
 import { EventCard, SmallTextCard } from 'components/Cards'
 import { TextButton } from 'components/Buttons'
-import { Event, HomeScreenDataResponse, homeScreenDataService } from 'services/screenDataService'
+import { HomeScreenDataResponse, homeScreenDataService } from 'services/screenDataService'
 import { useToast } from 'hooks/useToast'
+import { Event } from 'services/eventService'
 
 export const Home = ({ navigation }: any): JSX.Element => {
   const [screenData, setScreenData] = useState<HomeScreenDataResponse | null>(null)
@@ -41,11 +42,15 @@ export const Home = ({ navigation }: any): JSX.Element => {
 
   const handleSeeAllPress = (eventType: 'week' | 'popular'): void => {
     const titlePage = eventType === 'popular' ? 'Eventos Populares' : 'Essa semana'
-    navigation.navigate('Filter', { eventType, titlePage })
+    navigation.navigate('EventList', { eventType, titlePage })
   }
   const handleCardPress = (event: Event): void => {
     navigation.navigate('Event', { event, onGoBack: () => refreshData() })
   }
+
+  const onSearchInputPress = useCallback(() => {
+    navigation.navigate('EventSearch', { onGoBack: () => refreshData() })
+  }, [])
 
   useEffect(() => {
     refreshData()
@@ -59,7 +64,9 @@ export const Home = ({ navigation }: any): JSX.Element => {
 
       <ScrollView style={{ marginBottom: 70, width: '100%' }} showsVerticalScrollIndicator={false}>
         <Container style={{ marginTop: 10 }}>
-          <SearchInput placeholder='Pesquisar evento' />
+          <TouchableOpacity onPress={onSearchInputPress}>
+            <SearchInput placeholder='Pesquisar evento' editable={false}/>
+          </TouchableOpacity>
         </Container>
 
         {categories.length > 0 && (
@@ -121,7 +128,7 @@ export const Home = ({ navigation }: any): JSX.Element => {
               })
               : (
                 <TextRegular>Nenhum evento encontrado</TextRegular>
-              )}
+                )}
           </Container>
         </ScrollView>
 
@@ -154,7 +161,7 @@ export const Home = ({ navigation }: any): JSX.Element => {
               })
               : (
                 <TextRegular>Nenhum evento encontrado</TextRegular>
-              )}
+                )}
           </Container>
         </ScrollView>
       </ScrollView>
