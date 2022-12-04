@@ -89,6 +89,11 @@ export const Event = (props: EventProps): JSX.Element => {
           <TextRegular size={12} style={{ marginLeft: 5, textTransform: 'capitalize' }}>{formatEventDate()}</TextRegular>
         </Container>
 
+        <Container row={true} style={{ alignItems: 'center', marginTop: 10 }}>
+          <Icon name='building' size={15} color={colors.textPrimary} />
+          <TextRegular size={12} style={{ marginLeft: 5, textTransform: 'capitalize' }}>{event.campus}</TextRegular>
+        </Container>
+
         <Container style={{ marginTop: 20 }}>
           <TextBold size={24} style={{ textAlign: 'left' }}>Descriçao</TextBold>
           <TextRegular size={13} style={{ textAlign: 'left' }}>{event.description}</TextRegular>
