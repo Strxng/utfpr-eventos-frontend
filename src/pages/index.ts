@@ -4,7 +4,7 @@ import { SignUp } from './signup'
 import { Home } from './home'
 import { Favorites } from './favorites'
 import { Profile } from './profile'
-import { Filter } from './filter'
+import { EventList } from './eventList'
 import { Event } from './event'
 
-export { Initial, SignIn, SignUp, Home, Favorites, Profile, Filter, Event }
+export { Initial, SignIn, SignUp, Home, Favorites, Profile, EventList, Event }

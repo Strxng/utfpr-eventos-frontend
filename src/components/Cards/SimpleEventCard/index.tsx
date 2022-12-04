@@ -14,9 +14,10 @@ interface SimpleEventCardProps {
   eventDate: Date
   eventImage: string
   style?: {}
+  onPress?: () => void
 }
 
-export const SimpleEventCard = ({ eventName, eventDate, eventImage, style }: SimpleEventCardProps): JSX.Element => {
+export const SimpleEventCard = ({ eventName, eventDate, eventImage, style, onPress = () => { } }: SimpleEventCardProps): JSX.Element => {
   const { font } = useTheme() as ThemeTypeProps
 
   const formatEventDate = (): string => {
@@ -29,7 +30,7 @@ export const SimpleEventCard = ({ eventName, eventDate, eventImage, style }: Sim
   }
 
   return (
-    <TouchableOpacity onPress={() => { }}>
+    <TouchableOpacity onPress={onPress}>
       <Container style={style}>
         <ImageBackground source={{ uri: eventImage }} resizeMode='cover' style={{ flex: 1, justifyContent: 'center' }} imageStyle={{ borderTopLeftRadius: 18, borderTopRightRadius: 18 }} />
         <Footer>

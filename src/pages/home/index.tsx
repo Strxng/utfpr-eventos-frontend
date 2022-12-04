@@ -39,8 +39,9 @@ export const Home = ({ navigation }: any): JSX.Element => {
     })
   }, [selectedCategory])
 
-  const handleSeeAllPress = (): void => {
-    navigation.navigate('Filter')
+  const handleSeeAllPress = (eventType: 'week' | 'popular'): void => {
+    const titlePage = eventType === 'popular' ? 'Eventos Populares' : 'Essa semana'
+    navigation.navigate('Filter', { eventType, titlePage })
   }
   const handleCardPress = (event: Event): void => {
     navigation.navigate('Event', { event, onGoBack: () => refreshData() })
@@ -94,7 +95,7 @@ export const Home = ({ navigation }: any): JSX.Element => {
 
         <Container row={true} style={{ marginTop: 30, alignItems: 'center' }}>
           <TextBold size={22}>Eventos Populares</TextBold>
-          {popularEvents.length > 0 ? <TextButton text='Ver tudo' onPress={handleSeeAllPress} /> : <></>}
+          {popularEvents.length > 0 ? <TextButton text='Ver tudo' onPress={() => handleSeeAllPress('popular')} /> : <></>}
         </Container>
         <ScrollView
           horizontal={true}
@@ -126,7 +127,7 @@ export const Home = ({ navigation }: any): JSX.Element => {
 
         <Container row={true} style={{ marginTop: 30, alignItems: 'center' }}>
           <TextBold size={22}>Essa semana</TextBold>
-          {weekEvents.length > 0 ? <TextButton text='Ver tudo' onPress={handleSeeAllPress} /> : <></>}
+          {weekEvents.length > 0 ? <TextButton text='Ver tudo' onPress={() => handleSeeAllPress('week')} /> : <></>}
         </Container>
         <ScrollView
           horizontal={true}

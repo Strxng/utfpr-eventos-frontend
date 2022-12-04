@@ -1,36 +1,10 @@
 import { mainApiGet } from 'api/mainApi'
+import { Campus, Course } from './campusService'
+import { Event } from './eventService'
 
 interface Genre {
   id: string
   name: string
-}
-
-export interface Course {
-  id: string
-  name: string
-}
-
-export interface Campus {
-  id: string
-  name: string
-  courses: Course[]
-}
-
-interface Favorites {
-  favorites: number
-}
-export interface Event {
-  id: string
-  name: string
-  image: string
-  description: string
-  startDate: Date
-  endDate: Date
-  local: string
-  courseId: string
-  course: string
-  isFavorite: boolean
-  campus: string
 }
 export interface SignupScreenDataResponse {
   genres: Genre[]
@@ -39,7 +13,7 @@ export interface SignupScreenDataResponse {
 
 export interface HomeScreenDataResponse {
   courses: Course[]
-  popularEvents: Array<Event & Favorites>
+  popularEvents: Event[]
   weekEvents: Event[]
 }
 
@@ -50,13 +24,10 @@ export const signupScreenDataService = async (): Promise<SignupScreenDataRespons
   return { genres, campus }
 }
 
-export const homeScreenDataService = async (categoryId: string): Promise<HomeScreenDataResponse> => {
-  const weekEventsUrlString = categoryId ? `event/week?categoryId=${categoryId}&page=1&limit=10` : 'event/week?page=1&limit=10'
-  const popularEventsUrlString = categoryId ? `event/popular?categoryId=${categoryId}?page=1&limit=10` : 'event/popular?page=1&limit=10'
-
+export const homeScreenDataService = async (courseId: string): Promise<HomeScreenDataResponse> => {
   const { data: courses } = await mainApiGet('course')
-  const { data: weekEvents } = await mainApiGet(weekEventsUrlString)
-  const { data: popularEvents } = await mainApiGet(popularEventsUrlString)
+  const { data: weekEvents } = await mainApiGet(`event/week?page=1&limit=10&courseId=${courseId}`)
+  const { data: popularEvents } = await mainApiGet(`event/popular?page=1&limit=10&courseId=${courseId}`)
 
   return {
     courses,
