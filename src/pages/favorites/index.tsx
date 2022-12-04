@@ -5,7 +5,7 @@ import { useToast } from 'hooks/useToast'
 import React, { useCallback, useEffect, useState } from 'react'
 import { ScrollView } from 'react-native'
 import { Event } from 'services/screenDataService'
-import { getFavoriteEvents } from 'services/userService'
+import { getFavoriteEvents, unfavoriteService } from 'services/userService'
 import { useTheme } from 'styled-components'
 import { ThemeTypeProps } from '../../../theme'
 
@@ -17,12 +17,33 @@ export const Favorites = ({ navigation }: FavoritesProps): JSX.Element => {
   const [events, setEvents] = useState<Event[]>([])
   const [finishedEvents, setFinishedEvents] = useState<Event[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const { notifyError } = useToast()
+  const { notifyError, notifySuccess } = useToast()
   const { font } = useTheme() as ThemeTypeProps
+
+  const onHeartCardPress = useCallback((eventId: string) => {
+    setIsLoading(true)
+
+    unfavoriteService(eventId).then(() => {
+      setIsLoading(false)
+      notifySuccess('Evento desfavoritado com sucesso')
+      getFavorites()
+    }).catch(() => {
+      setIsLoading(false)
+      notifyError('Falha ao desfavoritar o evento')
+    })
+  }, [])
+
+  const onCardPress = useCallback((event: Event) => {
+    navigation.navigate('Event', {
+      event,
+      onGoBack: () => {
+        getFavorites()
+      }
+    })
+  }, [])
 
   const getFavorites = useCallback(() => {
     setIsLoading(true)
-
     getFavoriteEvents().then((eventsResponse) => {
       setIsLoading(false)
       setEvents(eventsResponse.events)
@@ -52,10 +73,11 @@ export const Favorites = ({ navigation }: FavoritesProps): JSX.Element => {
                 eventLocal={event.local}
                 eventName={event.name}
                 eventImage={event.image}
+                onHeartPress={() => {
+                  onHeartCardPress(event.id)
+                }}
                 onPress={() => {
-                  navigation.navigate('Event', {
-                    event: { ...event, isFavorite: true }, onGoBack: () => getFavorites()
-                  })
+                  onCardPress(event)
                 }}
               />
             </MarginWrapper>
@@ -73,9 +95,6 @@ export const Favorites = ({ navigation }: FavoritesProps): JSX.Element => {
                     eventLocal={event.local}
                     eventName={event.name}
                     eventImage={event.image}
-                    onPress={() => {
-
-                    }}
                     finished={true}
                   />
                 </MarginWrapper>

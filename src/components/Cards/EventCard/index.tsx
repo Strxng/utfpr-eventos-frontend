@@ -51,7 +51,7 @@ export const EventCard = ({ eventName, eventLocal, eventImage, eventDate, small 
         <Footer>
           <TextBold size={18} style={{ textAlign: 'left' }}>{formatEventName()}</TextBold>
           <LocaleContainer>
-            <Icon name="location" size={15} color={colors.textPrimary} />
+            <Icon name="building" size={15} color={colors.textPrimary} />
             <TextRegular size={12} style={{ marginLeft: 5 }}>{formatEventLocal()}</TextRegular>
           </LocaleContainer>
         </Footer>

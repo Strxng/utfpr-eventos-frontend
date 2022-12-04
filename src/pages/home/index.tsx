@@ -111,7 +111,7 @@ export const Home = ({ navigation }: any): JSX.Element => {
                     key={event.id}
                     eventName={event.name}
                     eventDate={event.startDate}
-                    eventLocal={event.local}
+                    eventLocal={event.campus}
                     eventImage={event.image}
                     onPress={() => handleCardPress(event)}
                     style={dinamicStyle}
@@ -143,7 +143,7 @@ export const Home = ({ navigation }: any): JSX.Element => {
                     key={event.id}
                     eventName={event.name}
                     eventDate={event.startDate}
-                    eventLocal={event.local}
+                    eventLocal={event.campus}
                     eventImage={event.image}
                     style={dinamicStyle}
                     onPress={() => handleCardPress(event)}

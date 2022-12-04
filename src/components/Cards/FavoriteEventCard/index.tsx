@@ -15,10 +15,11 @@ interface FavoriteEventCardProps {
   eventLocal: string
   eventImage: string
   finished?: boolean
-  onPress: () => void
+  onPress?: () => void
+  onHeartPress?: () => void
 }
 
-export const FavoriteEventCard = ({ eventDate, eventName, eventLocal, eventImage, finished, onPress = () => { } }: FavoriteEventCardProps): JSX.Element => {
+export const FavoriteEventCard = ({ eventDate, eventName, eventLocal, eventImage, finished, onPress = () => { }, onHeartPress = () => { } }: FavoriteEventCardProps): JSX.Element => {
   const { navigate } = useNavigation()
   const { colors } = useTheme() as ThemeTypeProps
 
@@ -45,9 +46,9 @@ export const FavoriteEventCard = ({ eventDate, eventName, eventLocal, eventImage
         </IconWithTextContainer>
       </TextContainer>
 
-      {!finished && <IconButton>
+      {!finished && <IconButton onPress={onHeartPress} >
         <Icon name="heart" size={45} color={'yellow'} />
       </IconButton>}
-    </CardButton>
+    </CardButton >
   )
 }

@@ -13,7 +13,7 @@ const Tab = createBottomTabNavigator()
 const TabNavigation = (): JSX.Element => {
   return (
     <Tab.Navigator initialRouteName='HomeTab' screenOptions={{ headerShown: false }} tabBar={(props) => <FooterNavigation {...props} />}>
-      <Tab.Screen name='HomeTab' component={Home} />
+      <Tab.Screen name='HomeTab' component={Home} options={{ unmountOnBlur: true }} />
       <Tab.Screen name='FavoritesTab' component={Favorites} options={{ unmountOnBlur: true }} />
       <Tab.Screen name='ProfileTab' component={Profile} />
     </Tab.Navigator>

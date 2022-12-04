@@ -51,12 +51,12 @@ export const signupScreenDataService = async (): Promise<SignupScreenDataRespons
 }
 
 export const homeScreenDataService = async (categoryId: string): Promise<HomeScreenDataResponse> => {
-  const urlString = categoryId ? `event/popular-week?categoryId=${categoryId}` : 'event/popular-week'
+  const weekEventsUrlString = categoryId ? `event/week?categoryId=${categoryId}&page=1&limit=10` : 'event/week?page=1&limit=10'
+  const popularEventsUrlString = categoryId ? `event/popular?categoryId=${categoryId}?page=1&limit=10` : 'event/popular?page=1&limit=10'
 
   const { data: courses } = await mainApiGet('course')
-  const { data: events } = await mainApiGet(urlString)
-
-  const { popularEvents, weekEvents } = events
+  const { data: weekEvents } = await mainApiGet(weekEventsUrlString)
+  const { data: popularEvents } = await mainApiGet(popularEventsUrlString)
 
   return {
     courses,
