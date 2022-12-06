@@ -5,11 +5,12 @@ import * as Font from 'expo-font'
 import { Navigation } from './src/config/navigation'
 import { UserProvider } from './src/contexts/userContext'
 import { ThemeProvider } from 'styled-components'
-import { ToastProvider } from 'react-native-styled-toast'
+import Toast from 'react-native-toast-message'
+import { toastConfig } from './src/config/toastConfig'
 import { darkTheme, lightTheme } from './theme'
 import { findThemeStore } from 'storage/configStorage'
 
-export default function App(): JSX.Element {
+export default function App (): JSX.Element {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [isDark, setIsDark] = useState<boolean>(false)
 
@@ -41,9 +42,8 @@ export default function App(): JSX.Element {
   return (
     <UserProvider>
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
-        <ToastProvider>
           <Navigation />
-        </ToastProvider>
+        <Toast config={toastConfig}/>
       </ThemeProvider>
     </UserProvider>
   )
