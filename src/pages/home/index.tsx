@@ -1,14 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { FullPage, Container } from 'components/Wrappers'
 import { UserHeader } from 'components/Headers'
-import { SearchInput } from 'components/Inputs'
-import { ScrollView, TouchableOpacity } from 'react-native'
+import { ScrollView } from 'react-native'
 import { TextBold, TextRegular } from 'components/Texts'
 import { EventCard, SmallTextCard } from 'components/Cards'
 import { TextButton } from 'components/Buttons'
 import { HomeScreenDataResponse, homeScreenDataService } from 'services/screenDataService'
 import { useToast } from 'hooks/useToast'
 import { Event } from 'services/eventService'
+import { SearchButton } from './components/searchButton'
 
 export const Home = ({ navigation }: any): JSX.Element => {
   const [screenData, setScreenData] = useState<HomeScreenDataResponse | null>(null)
@@ -64,9 +64,7 @@ export const Home = ({ navigation }: any): JSX.Element => {
 
       <ScrollView style={{ marginBottom: 70, width: '100%' }} showsVerticalScrollIndicator={false}>
         <Container style={{ marginTop: 10 }}>
-          <TouchableOpacity onPress={onSearchInputPress}>
-            <SearchInput placeholder='Pesquisar evento' editable={false}/>
-          </TouchableOpacity>
+          <SearchButton onPress={onSearchInputPress} />
         </Container>
 
         {categories.length > 0 && (
