@@ -7,7 +7,7 @@ interface HttpReponse {
 }
 
 const Api = axios.create({
-  baseURL: 'http://10.0.0.114:8080/', // mudar dps de acordo com as envs
+  baseURL: 'https://urchin-app-n8vub.ondigitalocean.app/', // mudar dps de acordo com as envs
   timeout: 10000
 })
 

@@ -22,7 +22,7 @@ export interface UserContextData {
 
 const UserContext = createContext<UserContextData>({} as UserContextData)
 
-export function UserProvider({ children }: any): JSX.Element {
+export function UserProvider ({ children }: any): JSX.Element {
   const [user, setUser] = useState<User | null>(null)
 
   useEffect(() => {
