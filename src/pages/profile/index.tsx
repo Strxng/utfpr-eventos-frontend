@@ -67,7 +67,7 @@ export const Profile = (): JSX.Element => {
               setIsLoading(true)
               setDarkModeActive(option)
 
-              const successMsg = 'Tema alterado com sucesso. Reinicie o app para aplicar a alteração'
+              const successMsg = 'Tema alterado com sucesso. Reinicie o app'
               const errMsg = 'Erro ao aplicar o novo tema, tente novamente'
 
               if (option) {

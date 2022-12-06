@@ -1,4 +1,5 @@
 import styled from 'styled-components/native'
+import { ThemeType } from '../../../theme'
 
 export const Footer = styled.View`
   margin-top: auto;
@@ -10,6 +11,7 @@ export const Footer = styled.View`
 export const BgImage = styled.ImageBackground`
   flex: 1;
   align-items: center;
+  background-color: ${({ theme }: ThemeType) => theme.colors.background}
 `
 
 export const LogoImage = styled.Image`
