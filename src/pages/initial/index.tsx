@@ -1,5 +1,4 @@
 import React from 'react'
-import { FullPage } from 'components/Wrappers'
 import { BgImage, LogoImage, Footer } from './styles'
 import { Asset } from 'expo-asset'
 import { LargeButton } from 'components/Buttons'
@@ -20,28 +19,26 @@ export const Initial = ({ navigation }: InitialProps): JSX.Element => {
   const { name } = useTheme() as ThemeTypeProps
 
   return (
-    <FullPage center={true} defaultPadding={false}>
-      <BgImage source={{ uri: Asset.fromModule(bgInitialPageImage).uri }} imageStyle={{ opacity: 0.2 }}>
-        <LogoImage source={{ uri: Asset.fromModule(name === 'light' ? logoBlack : logoWhite).uri }} style={{ resizeMode: 'stretch', height: 160, width: 250 }} />
-        <Footer>
-          <LargeButton
-            text={'Descubra agora!'}
-            onPress={() => {
-              if (user) {
-                navigation.navigate('Home')
-              } else {
-                navigation.navigate('SignIn')
-              }
-            }}
-          />
+    <BgImage source={{ uri: Asset.fromModule(bgInitialPageImage).uri }} imageStyle={{ opacity: 0.2 }}>
+      <LogoImage source={{ uri: Asset.fromModule(name === 'light' ? logoBlack : logoWhite).uri }} style={{ resizeMode: 'stretch', height: 160, width: 250 }} />
+      <Footer>
+        <LargeButton
+          text={'Descubra agora!'}
+          onPress={() => {
+            if (user) {
+              navigation.navigate('Home')
+            } else {
+              navigation.navigate('SignIn')
+            }
+          }}
+        />
 
-          <TextRegular size={13} style={{ marginTop: 20 }}>
-            Nosso app foi desenvolvido para você ficar ligado em
-            todos os eventos que acontecem na
-          </TextRegular>
-          <TextRegular size={13}>UTFPR - Dois Vizinhos</TextRegular>
-        </Footer>
-      </BgImage>
-    </FullPage>
+        <TextRegular size={13} style={{ marginTop: 20 }}>
+          Nosso app foi desenvolvido para você ficar ligado em
+          todos os eventos que acontecem na
+        </TextRegular>
+        <TextRegular size={13}>UTFPR - Dois Vizinhos</TextRegular>
+      </Footer>
+    </BgImage>
   )
 }

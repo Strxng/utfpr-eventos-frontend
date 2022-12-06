@@ -84,7 +84,7 @@ export const EventList = ({ navigation, route }: EventListProps): JSX.Element =>
             <ScrollView
               horizontal={true}
               showsHorizontalScrollIndicator={false}
-              style={{ maxHeight: 60 }}
+              style={{ maxHeight: 60, width: '100%' }}
             >
               <Container row={true} style={{ paddingRight: 0 }}>
                 {campus.map((c, index) => {
